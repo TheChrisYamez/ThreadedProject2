@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace DBConnector
 {
-    public class DBDataManager
+    public class ProductDB
     {
-        public static Product GetProduct(int productID)
-        {
-
-        }
     }
 }

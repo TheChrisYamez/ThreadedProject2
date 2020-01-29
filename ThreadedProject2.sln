@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupplierManager", "Supplier
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductSupplierManager", "ProductSupplierManager\ProductSupplierManager.csproj", "{5C45F226-EA97-445C-9269-695CF3291927}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DABF9D32-F014-4D68-B451-68F297C644EE}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\Desktop\FormRelations.vsdx = ..\..\..\..\..\Desktop\FormRelations.vsdx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -5,12 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/* Date: Jan 30, 2020
+ * Author: Brian Appleton
+ * 
+ * Thread Project #2
+ * 
+ * this class is for getting the connection to the travel experts DB
+ *
+ *
+ */
+
 namespace DBConnector
 {
     /// <summary>
     /// A static class for a connection string to the TravelExperts Database in SQL
     /// </summary>
-    public class TravelExpertsConnection
+    public static class TravelExpertsConnection
     {
         /// <summary>
         /// Gets a SqlConnection to the travelexperts DB

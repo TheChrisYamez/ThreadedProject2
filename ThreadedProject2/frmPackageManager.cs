@@ -16,6 +16,9 @@ namespace ThreadedProject2
         public frmPackageManager()
         {
             InitializeComponent();
+
+            System.Data.SqlClient.SqlConnection connect = DBConnector.TravelExpertsConnection.GetConnection();
+            connect.Open();
         }
     }
 }

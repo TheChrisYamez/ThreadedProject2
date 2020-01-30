@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Package.cs" />
+    <Compile Include="PackageDB.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,6 +52,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="TravelExpertsConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

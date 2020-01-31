@@ -15,6 +15,7 @@ namespace ThreadedProject2
     {
         BindingList<int> PackageIds;
         Package Package;
+        BindingList<Product> Products;
 
         public frmPackageManager()
         {
@@ -30,10 +31,12 @@ namespace ThreadedProject2
             //bind a combo box to a list containing the package id's
             cmbPackageIds.DataSource = PackageIds;
 
+            //Bind the datagrid to the list containing all relavent products
+            dtgProducts.DataSource = Products;
+
             if (Int32.TryParse(cmbPackageIds.Text,out int id))
             {
-                Package = PackageDB.GetPackageById(id);
-                UpdatePackageFields(Package);
+                UpdatePackageFields(id);
             }
         }
 
@@ -54,31 +57,43 @@ namespace ThreadedProject2
         /// <param name="e"></param>
         private void cmbPackageIds_SelectedValueChanged(object sender, EventArgs e)
         {
-            int packageID = (int)(sender as ComboBox).SelectedItem;
-
-            //get the package data
-            Package = PackageDB.GetPackageById(packageID);
+            int packageId = (int)(sender as ComboBox).SelectedItem;
 
             //update the form fields
-            UpdatePackageFields(Package);
+            UpdatePackageFields(packageId);
+            UpdatePackageProductsData(packageId);
+        }
+
+        private void UpdatePackageProductsData(int packageID)
+        {
+            if (!Object.Equals(Products,null))
+                Products.Clear();
+
+            //get the products linked to the package
+            Products = PackageDB.GetPackageProductsById(packageID);
+            dtgProducts.DataSource = Products;
         }
 
         /// <summary>
         /// Updates the Package Fields displayed on the form
         /// </summary>
         /// <param name="package"></param>
-        private bool UpdatePackageFields(Package package)
+        private bool UpdatePackageFields(int packageId)
         {
-            if (Object.Equals(package, null))
-                return false;
+            //get the package data
+            Package = PackageDB.GetPackageById(packageId);
 
-            tbxPkgCommission.Text 
-                = (package.PkgAgencyCommission.HasValue) ? Decimal.Round((decimal)package.PkgAgencyCommission,2).ToString() : String.Empty;
-            tbxPkgPrice.Text = Decimal.Round(package.PkgBasePrice, 2).ToString();
-            tbxPkgDesc.Text = package.PkgDesc.ToString();
-            tbxPkgEndDate.Text = package.PkgEndDate.ToString();
-            tbxPkgName.Text = package.PkgName.ToString();
-            tbxPkgStartDate.Text = package.PkgStartDate.ToString();
+            //Update package fields
+            tbxPkgCommission.Text = 
+                (Package.PkgAgencyCommission.HasValue) ? 
+                Decimal.Round((decimal)Package.PkgAgencyCommission,2).ToString() : String.Empty;
+
+            tbxPkgPrice.Text = Decimal.Round(Package.PkgBasePrice, 2).ToString();
+            tbxPkgDesc.Text = Package.PkgDesc.ToString();
+            tbxPkgEndDate.Text = Package.PkgEndDate.ToString();
+            tbxPkgName.Text = Package.PkgName.ToString();
+            tbxPkgStartDate.Text = Package.PkgStartDate.ToString();
+
 
             return true;
         }

@@ -50,6 +50,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Supplier.cs" />
+    <Compile Include="SupplierDB.cs" />
     <Compile Include="TravelExpertsDB.cs" />
   </ItemGroup>
   <ItemGroup>

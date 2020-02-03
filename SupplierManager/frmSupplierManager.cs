@@ -16,5 +16,10 @@ namespace SupplierManager
         {
             InitializeComponent();
         }
+
+        private void frmSupplierManager_Load(object sender, EventArgs e)
+        {
+            //hi
+        }
     }
 }

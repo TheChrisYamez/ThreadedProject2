@@ -50,7 +50,7 @@ namespace DBConnector
         public DateTime? PkgEndDate { get; set; }
 
         /// <summary>
-        /// The nullable package description
+        /// The non-nullable package description
         /// </summary>
         public string  PkgDesc { get; set; }
 
@@ -65,7 +65,7 @@ namespace DBConnector
         public decimal? PkgAgencyCommission { get; set; }
 
         /// <summary>
-        /// Compares this instance of a Package to the supplied Package Object to evaluate if there values
+        /// Compares this instance of a Package to the supplied Package Object to evaluate if their values
         /// are equivalent. If the objects match, return true.
         /// </summary>
         /// <param name="package">to package object to compare against</param>

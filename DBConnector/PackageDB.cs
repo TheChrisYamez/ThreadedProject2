@@ -22,8 +22,6 @@ namespace DBConnector
     public static class PackageDB
     {
 
-
-
         /// <summary>
         /// Gets all packages from the database and returns a list of package objects
         /// </summary>
@@ -105,9 +103,9 @@ namespace DBConnector
         /// Gets all package ids
         /// </summary>
         /// <returns></returns>
-        public static BindingList<int> GetPackageIds()
+        public static List<int> GetPackageIds()
         {
-            BindingList<int> packageIds = new BindingList<int>();
+            List<int> packageIds = new List<int>();
 
             SqlConnection con = TravelExpertsConnection.GetConnection();
             string command = "SELECT PackageId FROM Packages";
@@ -130,9 +128,9 @@ namespace DBConnector
         /// </summary>
         /// <param name="packageId">package id to retrieve products for</param>
         /// <returns>returns a list of packages</returns>
-        public static BindingList<Product> GetPackageProductsById(int packageId)
+        public static List<Product> GetPackageProductsById(int packageId)
         {
-            BindingList<Product> products = new BindingList<Product>();
+            List<Product> products = new List<Product>();
 
             SqlConnection con = TravelExpertsConnection.GetConnection();
 
@@ -156,16 +154,20 @@ namespace DBConnector
 
                 using (SqlDataReader read = cmd.ExecuteReader(CommandBehavior.CloseConnection))
                 {
-                    while (read.Read())
+                    if (read.HasRows)
                     {
-                        Product product = new Product()
+                        while (read.Read())
                         {
-                            ProductID = (int)read[1],
-                            ProdName = read[2].ToString()
-                           
-                        };
-                        products.Add(product);
-                    }
+                            Product product = new Product()
+                            {
+                                ProductID = (int)read[1],
+                                ProdName = read[2].ToString()
+
+                            };
+                            products.Add(product);
+                        }
+                    } 
+
                 }// close data reader
             }// close command
             return products;
@@ -176,11 +178,57 @@ namespace DBConnector
         /// </summary>
         /// <param name="packageId">the package id to be updated</param>
         /// <returns></returns>
-        public static bool UpdatePackageById(int packageId)
+        public static bool UpdatePackageById(Package package)
         {
-            Package package = GetPackageById(packageId);
+            Package oldPackage = GetPackageById(package.PackageId);
 
-            return true; //success
+            //given package is null or no id
+            if (Object.Equals(package, null) || package.PackageId == 0 || oldPackage.CompareTo(package))
+                return false;
+
+            string query =
+                "Update Packages " +
+                "SET PkgName = @PkgName " +
+                "SET PkgStartDate = @PkgStartDate " +
+                "SET PkgEndDate = @PkgEndDate " +
+                "SET PkgDesc = @PkgDesc " +
+                "SET PkgBasePrice = @PkgBasePrice " +
+                "SET PkgAgencyCommission = @PkgAgencyCommission " +
+                "WHERE PackageId = @PackageId";
+
+            int rowsUpdated;
+
+            SqlConnection connect = TravelExpertsConnection.GetConnection();
+
+            using (SqlCommand cmd = new SqlCommand(query, connect))
+            {
+                connect.Open();
+
+                cmd.Parameters.AddWithValue("@PkgName",package.PkgName);
+                cmd.Parameters.AddWithValue("@PkgDesc",package.PkgDesc);
+                cmd.Parameters.AddWithValue("@PkgBasePrice", package.PkgBasePrice);
+                cmd.Parameters.AddWithValue("@PkgAgencyCommission",package.PkgAgencyCommission);
+
+                if (Object.Equals(package.PkgStartDate, null))
+                    cmd.Parameters.AddWithValue("@PkgStartDate", DBNull.Value);
+                else
+                    cmd.Parameters.AddWithValue("@PkgStartDate", package.PkgStartDate);
+
+                if (Object.Equals(package.PkgEndDate, null))
+                    cmd.Parameters.AddWithValue("@PkgEndDate", DBNull.Value);
+                else
+                    cmd.Parameters.AddWithValue("@PkgEndDate", package.PkgEndDate);
+
+                rowsUpdated = cmd.ExecuteNonQuery();
+
+                connect.Close();
+            }
+
+            //no rows updated.
+            if (rowsUpdated == 0)
+                return false;
+            else
+                return true;
         }
 
     }

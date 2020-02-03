@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\..\..\..\Desktop\FormRelations.vsdx = ..\..\..\..\..\Desktop\FormRelations.vsdx
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApp", "View\MainApp.csproj", "{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{5C45F226-EA97-445C-9269-695CF3291927}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C45F226-EA97-445C-9269-695CF3291927}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C45F226-EA97-445C-9269-695CF3291927}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

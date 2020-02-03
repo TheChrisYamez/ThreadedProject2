@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{588A2BD9-8EFD-49DE-9F86-421A41A32F47}</ProjectGuid>
+    <ProjectGuid>{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ThreadedProject2</RootNamespace>
-    <AssemblyName>ThreadedProject2</AssemblyName>
+    <RootNamespace>View</RootNamespace>
+    <AssemblyName>View</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,26 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FlatButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainView.Designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPackageManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPackageManager.Designer.cs">
-      <DependentUpon>frmPackageManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PackageValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPackageManager.resx">
-      <DependentUpon>frmPackageManager.cs</DependentUpon>
+    <EmbeddedResource Include="MainView.resx">
+      <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -75,10 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Properties\DataSources\DBConnector.Package.datasource" />
-    <None Include="Properties\DataSources\DBConnector.Product.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,13 +83,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DBConnector\DBConnector.csproj">
-      <Project>{14eb42e7-b9d9-4d88-ae35-a494c4c17842}</Project>
-      <Name>DBConnector</Name>
+    <ProjectReference Include="..\ProductManager\ProductManager.csproj">
+      <Project>{0EE84BAE-3777-4218-B643-6FF676231629}</Project>
+      <Name>ProductManager</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\btnclear.png" />
+    <ProjectReference Include="..\SupplierManager\SupplierManager.csproj">
+      <Project>{4CF3392D-C63B-46A0-9C4C-6ABEFA5A3FCD}</Project>
+      <Name>SupplierManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThreadedProject2\PackageManager.csproj">
+      <Project>{588A2BD9-8EFD-49DE-9F86-421A41A32F47}</Project>
+      <Name>PackageManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

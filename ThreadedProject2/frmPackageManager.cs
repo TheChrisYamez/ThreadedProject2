@@ -13,9 +13,20 @@ namespace ThreadedProject2
 {
     public partial class frmPackageManager : Form
     {
-        BindingList<int> PackageIds;
+        /// <summary>
+        /// The currently selected package
+        /// </summary>
         Package Package;
-        BindingList<Product> Products;
+
+        /// <summary>
+        /// the binded list of package id's
+        /// </summary>
+        readonly BindingList<int> PackageIds = new BindingList<int>();
+
+        /// <summary>
+        /// the list of products attached to a package
+        /// </summary>
+        readonly BindingList<Product> Products = new BindingList<Product>();
 
         public frmPackageManager()
         {
@@ -25,19 +36,33 @@ namespace ThreadedProject2
 
         private void frmPackageManager_Load(object sender, EventArgs e)
         {
-            //gets the package id's
-            PackageIds = PackageDB.GetPackageIds();
-
-            //bind a combo box to a list containing the package id's
+            //bind combo box to package id's
             cmbPackageIds.DataSource = PackageIds;
 
             //Bind the datagrid to the list containing all relavent products
             dtgProducts.DataSource = Products;
 
-            if (Int32.TryParse(cmbPackageIds.Text,out int id))
+            DisplayPackageIds();
+
+            if (Int32.TryParse(cmbPackageIds.Text, out int id))
             {
-                UpdatePackageFields(id);
+                DisplayPackage(id);
+                DisplayPackageProducts(id);
             }
+        }
+        private void DisplayPackageIds()
+        {
+            List<int> ids = PackageDB.GetPackageIds();
+
+            //list hasnt changed. return;
+            if (PackageIds.SequenceEqual(ids))
+                return;
+
+            PackageIds.Clear();
+
+            //add to binding list
+            foreach (int id in ids)
+                PackageIds.Add(id);    
         }
 
         /// <summary>
@@ -47,7 +72,7 @@ namespace ThreadedProject2
         /// <param name="e"></param>
         private void cmbPackageIds_Click(object sender, EventArgs e)
         {
-            PackageIds = PackageDB.GetPackageIds();
+            DisplayPackageIds();
         }
 
         /// <summary>
@@ -57,29 +82,35 @@ namespace ThreadedProject2
         /// <param name="e"></param>
         private void cmbPackageIds_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (Object.Equals((sender as ComboBox).SelectedItem, null))
+                return;
+
             int packageId = (int)(sender as ComboBox).SelectedItem;
 
             //update the form fields
-            UpdatePackageFields(packageId);
-            UpdatePackageProductsData(packageId);
+            DisplayPackage(packageId);
+            DisplayPackageProducts(packageId);
         }
 
-        private void UpdatePackageProductsData(int packageID)
+        private void DisplayPackageProducts(int packageID)
         {
             if (!Object.Equals(Products,null))
                 Products.Clear();
 
             //get the products linked to the package
-            Products = PackageDB.GetPackageProductsById(packageID);
-            dtgProducts.DataSource = Products;
+            foreach (Product product in PackageDB.GetPackageProductsById(packageID))
+                Products.Add(product);
         }
 
         /// <summary>
         /// Updates the Package Fields displayed on the form
         /// </summary>
         /// <param name="package"></param>
-        private bool UpdatePackageFields(int packageId)
+        private bool DisplayPackage(int packageId)
         {
+            if (!Object.Equals(Package,null) && packageId == Package.PackageId)
+                return false;
+
             //get the package data
             Package = PackageDB.GetPackageById(packageId);
 
@@ -90,12 +121,25 @@ namespace ThreadedProject2
 
             tbxPkgPrice.Text = Decimal.Round(Package.PkgBasePrice, 2).ToString();
             tbxPkgDesc.Text = Package.PkgDesc.ToString();
-            tbxPkgEndDate.Text = Package.PkgEndDate.ToString();
             tbxPkgName.Text = Package.PkgName.ToString();
+
+            tbxPkgEndDate.CustomFormat = Object.Equals(Package.PkgEndDate, null) ? " " : "dd/mm/yyyy";
+            tbxPkgEndDate.Text = Package.PkgStartDate.ToString();
+
+            tbxPkgStartDate.CustomFormat = Object.Equals(Package.PkgStartDate, null) ? " " : "dd/mm/yyyy";
             tbxPkgStartDate.Text = Package.PkgStartDate.ToString();
 
-
             return true;
+        }
+
+        private void productBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void packageBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

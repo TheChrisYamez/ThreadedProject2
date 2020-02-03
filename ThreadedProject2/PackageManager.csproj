@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmPackageManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,9 +55,6 @@
     <Compile Include="PackageValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPackageManager.resx">
       <DependentUpon>frmPackageManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,9 +88,16 @@
       <Project>{14eb42e7-b9d9-4d88-ae35-a494c4c17842}</Project>
       <Name>DBConnector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProductSupplierManager\ProductSupplierManager.csproj">
+      <Project>{5C45F226-EA97-445C-9269-695CF3291927}</Project>
+      <Name>ProductSupplierManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\btnclear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
  * 
  * Thread Project #2
  * 
- * this class is for 
+ * this class is for holdinmg product objects from a sql db
  *
  *
  */

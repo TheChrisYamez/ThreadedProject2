@@ -13,7 +13,7 @@ using System.Windows.Forms;
  */
 
 
-namespace View
+namespace MainApp
 {
     public class FlatButton : Button
     {

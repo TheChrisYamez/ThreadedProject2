@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>View</RootNamespace>
-    <AssemblyName>View</AssemblyName>
+    <RootNamespace>MainApp</RootNamespace>
+    <AssemblyName>MainApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,19 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlatButton.cs">
+    <Compile Include="CustomControls\FlatButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="MainView.cs">
+    <Compile Include="frmMainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainView.Designer.cs">
-      <DependentUpon>MainView.cs</DependentUpon>
+    <Compile Include="frmMainView.Designer.cs">
+      <DependentUpon>frmMainView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainView.resx">
-      <DependentUpon>MainView.cs</DependentUpon>
+    <EmbeddedResource Include="frmMainView.resx">
+      <DependentUpon>frmMainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -68,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -86,6 +87,10 @@
     <ProjectReference Include="..\ProductManager\ProductManager.csproj">
       <Project>{0EE84BAE-3777-4218-B643-6FF676231629}</Project>
       <Name>ProductManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductSupplierManager\ProductSupplierManager.csproj">
+      <Project>{5C45F226-EA97-445C-9269-695CF3291927}</Project>
+      <Name>ProductSupplierManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\SupplierManager\SupplierManager.csproj">
       <Project>{4CF3392D-C63B-46A0-9C4C-6ABEFA5A3FCD}</Project>

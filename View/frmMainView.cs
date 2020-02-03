@@ -11,31 +11,43 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ThreadedProject2;
 
-namespace View
+/* Date: Jan 30, 2020
+ * Author: Brian Appleton
+ * 
+ * Thread Project #2
+ * 
+ * this class is the main entry point to the app and creates the uniform layout and menus for all forms
+ *
+ *
+ */
+
+namespace MainApp
 {
-    public partial class MainView : Form
+    public partial class frmMainView : Form
     {
         private bool IsMouseDown = false;
         private int xOffset;
         private int yOffset;
 
-        readonly frmPackageManager PackageManager;
-        readonly frmProductManager ProductManager;
-        readonly frmSupplierManager SupplierManager;
+        public readonly frmPackageManager PackageManager;
+        public readonly frmProductManager ProductManager;
+        public readonly frmSupplierManager SupplierManager;
 
-        public MainView()
+        public frmMainView()
         {
             InitializeComponent();
             PackageManager = new frmPackageManager();
             ProductManager = new frmProductManager();
             SupplierManager = new frmSupplierManager();
 
+
             ShowNewForm(PackageManager);
 
         }
         private void ShowNewForm(Form form)
         {
-            form.TopLevel = false;
+            form.MdiParent = this;
+
             pnlForms.Controls.Add(form);
 
             form.Dock = DockStyle.Fill;
@@ -54,6 +66,14 @@ namespace View
                 formToRemove = form;
 
             pnlForms.Controls.Remove(formToRemove);
+        }
+        public void ReplaceExistingForm(Form form)
+        {
+            if (pnlForms.Controls.Contains(form))
+                return;
+
+            RemoveExistingForm();
+            ShowNewForm(form);
         }
 
 
@@ -88,29 +108,18 @@ namespace View
 
         private void btnPackages_Click(object sender, EventArgs e)
         {
-            if (pnlForms.Controls.Contains(PackageManager))
-                return;
-
-            RemoveExistingForm();
-            ShowNewForm(PackageManager);
+            ReplaceExistingForm(PackageManager);
         }
+
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
-            if (pnlForms.Controls.Contains(ProductManager))
-                return;
-
-            RemoveExistingForm();
-            ShowNewForm(ProductManager);
+            ReplaceExistingForm(ProductManager);
         }
 
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
-            if (pnlForms.Controls.Contains(SupplierManager))
-                return;
-
-            RemoveExistingForm();
-            ShowNewForm(SupplierManager);
+            ReplaceExistingForm(SupplierManager);
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
  * 
  * Thread Project #2
  * 
- * this class is for 
+ * this class is for updating and retrieve data from a sql db
  *
  *
  */
@@ -121,6 +121,35 @@ namespace DBConnector
             } // close command
 
             return packageIds;
+        }
+
+        /// <summary>
+        /// Gets all package ids
+        /// </summary>
+        /// <returns></returns>
+        public static List<Package> GetPartialPackage()
+        {
+            List<Package> package = new List<Package>();
+
+            SqlConnection con = TravelExpertsConnection.GetConnection();
+            string command = "SELECT PackageId, PkgName FROM Packages";
+
+            using (SqlCommand cmd = new SqlCommand(command, con))
+            {
+                con.Open();
+                SqlDataReader read = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+
+                while (read.Read())
+ 
+                    package.Add(new Package()
+                    {
+                        PackageId = (int)read["PackageId"],
+                        PkgName = (string)read["PkgName"],
+                    });
+
+            } // close command
+
+            return package;
         }
 
         /// <summary>

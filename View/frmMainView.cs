@@ -1,4 +1,5 @@
-﻿using ProductManager;
+﻿
+using ProductManager;
 using SupplierManager;
 using System;
 using System.Collections.Generic;
@@ -23,59 +24,59 @@ using ThreadedProject2;
 
 namespace MainApp
 {
+    public enum Menu
+    {
+        Package,
+        Product,
+        Supplier,
+        ProductSupplier
+    }
     public partial class frmMainView : Form
     {
-        private bool IsMouseDown = false;
+
+        private bool IsMouseDown;
         private int xOffset;
         private int yOffset;
 
+
+        /// <summary>
+        /// Package manager form
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "<Form remains open until form closes>")]
         public readonly frmPackageManager PackageManager;
+
+
+        /// <summary>
+        /// Product Manager form
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "<Form remains open until form closes>")]
         public readonly frmProductManager ProductManager;
+
+
+        /// <summary>
+        /// Supplier Manager form
+        /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "<Form remains open until form closes>")]
         public readonly frmSupplierManager SupplierManager;
 
         public frmMainView()
         {
             InitializeComponent();
+
             PackageManager = new frmPackageManager();
             ProductManager = new frmProductManager();
             SupplierManager = new frmSupplierManager();
 
-
-            ShowNewForm(PackageManager);
-
         }
-        private void ShowNewForm(Form form)
-        {
-            form.MdiParent = this;
 
+        private void InitializeMenuForms(Form form)
+        {
+            form.TopLevel = false;
             pnlForms.Controls.Add(form);
 
             form.Dock = DockStyle.Fill;
             form.FormBorderStyle = FormBorderStyle.None;
-            form.Show();
         }
-
-        private void RemoveExistingForm()
-        {
-            if (pnlForms.Controls.Count < 1)
-                return;
-
-            Form formToRemove = null;
-
-            foreach (Form form in pnlForms.Controls)
-                formToRemove = form;
-
-            pnlForms.Controls.Remove(formToRemove);
-        }
-        public void ReplaceExistingForm(Form form)
-        {
-            if (pnlForms.Controls.Contains(form))
-                return;
-
-            RemoveExistingForm();
-            ShowNewForm(form);
-        }
-
 
         private void tableLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -103,23 +104,50 @@ namespace MainApp
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            PackageManager.Dispose();
+            SupplierManager.Dispose();
+            ProductManager.Dispose();
             Application.Exit();
+
         }
 
         private void btnPackages_Click(object sender, EventArgs e)
         {
-            ReplaceExistingForm(PackageManager);
+            OpenForm(PackageManager);
         }
 
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
-            ReplaceExistingForm(ProductManager);
+            OpenForm(ProductManager);
         }
 
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
-            ReplaceExistingForm(SupplierManager);
+            OpenForm(SupplierManager);
+        }
+
+        public void OpenForm(Form form)
+        {
+            foreach (Form activeForm in pnlForms.Controls)
+            {
+                activeForm.Hide();
+                activeForm.SuspendLayout();
+            }
+
+            form.ResumeLayout();
+            form.Show();
+        }
+
+        private void frmMainView_Load(object sender, EventArgs e)
+        {
+
+            InitializeMenuForms(PackageManager);
+            InitializeMenuForms(ProductManager);
+            InitializeMenuForms(SupplierManager);
+
+            OpenForm(PackageManager);
+
         }
     }
 }

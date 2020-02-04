@@ -103,30 +103,6 @@ namespace DBConnector
         /// Gets all package ids
         /// </summary>
         /// <returns></returns>
-        public static List<int> GetPackageIds()
-        {
-            List<int> packageIds = new List<int>();
-
-            SqlConnection con = TravelExpertsConnection.GetConnection();
-            string command = "SELECT PackageId FROM Packages";
-
-            using (SqlCommand cmd = new SqlCommand(command, con))
-            {
-                con.Open();
-                SqlDataReader read = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-
-                while (read.Read())
-                    packageIds.Add((int)read["PackageId"]);
-
-            } // close command
-
-            return packageIds;
-        }
-
-        /// <summary>
-        /// Gets all package ids
-        /// </summary>
-        /// <returns></returns>
         public static List<Package> GetPartialPackage()
         {
             List<Package> package = new List<Package>();
@@ -140,7 +116,7 @@ namespace DBConnector
                 SqlDataReader read = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 
                 while (read.Read())
- 
+
                     package.Add(new Package()
                     {
                         PackageId = (int)read["PackageId"],
@@ -195,7 +171,7 @@ namespace DBConnector
                             };
                             products.Add(product);
                         }
-                    } 
+                    }
 
                 }// close data reader
             }// close command
@@ -233,16 +209,20 @@ namespace DBConnector
             {
                 connect.Open();
 
-                cmd.Parameters.AddWithValue("@PkgName",package.PkgName);
-                cmd.Parameters.AddWithValue("@PkgDesc",package.PkgDesc);
+                //Non-nullable params
+                cmd.Parameters.AddWithValue("@PkgName", package.PkgName);
+                cmd.Parameters.AddWithValue("@PkgDesc", package.PkgDesc);
                 cmd.Parameters.AddWithValue("@PkgBasePrice", package.PkgBasePrice);
-                cmd.Parameters.AddWithValue("@PkgAgencyCommission",package.PkgAgencyCommission);
 
+                //nullable params
+                if (Object.Equals(package.PkgAgencyCommission, null))
+                    cmd.Parameters.AddWithValue("@PkgAgencyCommission", DBNull.Value);
+                else
+                    cmd.Parameters.AddWithValue("@PkgAgencyCommission", package.PkgAgencyCommission);
                 if (Object.Equals(package.PkgStartDate, null))
                     cmd.Parameters.AddWithValue("@PkgStartDate", DBNull.Value);
                 else
                     cmd.Parameters.AddWithValue("@PkgStartDate", package.PkgStartDate);
-
                 if (Object.Equals(package.PkgEndDate, null))
                     cmd.Parameters.AddWithValue("@PkgEndDate", DBNull.Value);
                 else
@@ -260,5 +240,81 @@ namespace DBConnector
                 return true;
         }
 
+
+        /// <summary>
+        /// Updates a specific package property
+        /// </summary>
+        /// <param name="packageId">the package id to be updated</param>
+        /// <returns></returns>
+        public static bool UpdatePackagePropertyById(string propertyNameToUpdate, Package package)
+        {
+            //given package is null or no id
+            if (Object.Equals(package, null) || package.PackageId <= 0)
+                return false;
+
+            SqlConnection connect = TravelExpertsConnection.GetConnection();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Parameters.AddWithValue("@PackageId", package.PackageId);
+
+            string query = String.Empty;
+
+            switch (propertyNameToUpdate)
+            {
+                case nameof(Package.PkgAgencyCommission):
+                    query = "Update Packages SET PkgAgencyCommission = @PkgAgencyCommission WHERE PackageId = @PackageId";
+                    if (Object.Equals(package.PkgAgencyCommission, null))
+                        cmd.Parameters.AddWithValue("@PkgAgencyCommission", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@PkgAgencyCommission", package.PkgAgencyCommission);
+                    break;
+
+                case nameof(Package.PkgBasePrice):
+                    query = "Update Packages SET PkgBasePrice = @PkgBasePrice WHERE PackageId = @PackageId";
+                    cmd.Parameters.AddWithValue("@PkgBasePrice", package.PkgBasePrice);
+                    break;
+
+                case nameof(Package.PkgDesc):
+                    query = "Update Packages SET PkgDesc = @PkgDesc WHERE PackageId = @PackageId";
+                    cmd.Parameters.AddWithValue("@PkgDesc", package.PkgDesc);
+                    break;
+
+                case nameof(Package.PkgEndDate):
+                    query = "Update Packages SET PkgEndDate = @PkgEndDate WHERE PackageId = @PackageId";
+                    if (Object.Equals(package.PkgEndDate, null))
+                        cmd.Parameters.AddWithValue("@PkgEndDate", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@PkgEndDate", package.PkgEndDate);
+                    break;
+
+                case nameof(Package.PkgName):
+                    query = "Update Packages SET PkgName = @PkgName WHERE PackageId = @PackageId";
+                    cmd.Parameters.AddWithValue("@PkgName", package.PkgName);
+                    break;
+
+                case nameof(Package.PkgStartDate):
+                    query = "Update Packages SET PkgStartDate = @PkgStartDate WHERE PackageId = @PackageId";
+                    if (Object.Equals(package.PkgStartDate, null))
+                        cmd.Parameters.AddWithValue("@PkgStartDate", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@PkgStartDate", package.PkgStartDate);
+                    break;
+
+                default:
+                    return false;
+            }
+
+            cmd.CommandText = query;
+            cmd.Connection = connect;
+
+            connect.Open();
+            int rowsUpdated = cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
+
+            //no rows updated.
+            if (rowsUpdated == 0)
+                return false;
+            else
+                return true;
+        }
     }
 }

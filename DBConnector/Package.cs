@@ -23,17 +23,17 @@ namespace DBConnector
     public class Package
     {
 
-//        Make sure that you validate the data before creating the package:
-//a)	the Agency Commission cannot be greater than the Base Price
-//b)	the Package End Date must be later than Package Start Date
-//c)	Package Name and Package Description cannot be null
+        //        Make sure that you validate the data before creating the package:
+        //a)	the Agency Commission cannot be greater than the Base Price
+        //b)	the Package End Date must be later than Package Start Date
+        //c)	Package Name and Package Description cannot be null
 
 
         /// <summary>
-        /// The package ID
+        /// The non-nullable package ID
         /// </summary>
         public int PackageId { get; set; }
-        
+
         /// <summary>
         /// The non-nullable package name
         /// </summary>
@@ -50,12 +50,12 @@ namespace DBConnector
         public DateTime? PkgEndDate { get; set; }
 
         /// <summary>
-        /// The non-nullable package description
+        /// The package description
         /// </summary>
         public string  PkgDesc { get; set; }
 
         /// <summary>
-        /// The package price
+        /// The non-nullable package price
         /// </summary>
         public decimal PkgBasePrice { get; set; }
 

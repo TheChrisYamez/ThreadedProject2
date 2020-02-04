@@ -17,9 +17,7 @@ namespace ThreadedProject2
         /// <summary>
         /// The currently selected package
         /// </summary>
-        Package Package;
-
-
+        Package PackageSelected;
 
 
         /// <summary>
@@ -31,24 +29,41 @@ namespace ThreadedProject2
         /// <summary>
         /// the list of products attached to a package
         /// </summary>
+        readonly BindingList<Product> PackageProducts = new BindingList<Product>();
+
+        /// <summary>
+        /// the list of products in the database
+        /// </summary>
         readonly BindingList<Product> Products = new BindingList<Product>();
+
+        string DateTimePickerFormat = "dd/MM/yyyy";
 
         public frmPackageManager()
         {
             InitializeComponent();
 
-            
+         
+        }
+
+        private void PopulateProducts()
+        {
+            if (Products.Count > 0)
+                Products.Clear();
+
+            //add to binding list
+            foreach (Product product in ProductDB.GetProducts())
+                Products.Add(product);
         }
 
         #region Methods
         private void DisplayPackageProducts(int packageID)
         {
-            if (!Object.Equals(Products, null))
-                Products.Clear();
+            if (!Object.Equals(PackageProducts, null))
+                PackageProducts.Clear();
 
             //get the products linked to the package
             foreach (Product product in PackageDB.GetPackageProductsById(packageID))
-                Products.Add(product);
+                PackageProducts.Add(product);
         }
 
         /// <summary>
@@ -57,33 +72,33 @@ namespace ThreadedProject2
         /// <param name="package"></param>
         private bool DisplayPackage(int packageId)
         {
-            if (!Object.Equals(Package, null) && packageId == Package.PackageId)
+            if (!Object.Equals(PackageSelected, null) && packageId == PackageSelected.PackageId)
                 return false;
 
             //get the package data
-            Package = PackageDB.GetPackageById(packageId);
+            PackageSelected = PackageDB.GetPackageById(packageId);
 
             //Update package fields
-            tbxPackageId.Text = Package.PackageId.ToString();
+            tbxPackageId.Text = PackageSelected.PackageId.ToString();
 
             tbxPkgCommission.Text =
-                (Package.PkgAgencyCommission.HasValue) ?
-                Decimal.Round((decimal)Package.PkgAgencyCommission, 2).ToString() : String.Empty;
+                (PackageSelected.PkgAgencyCommission.HasValue) ?
+                Decimal.Round((decimal)PackageSelected.PkgAgencyCommission, 2).ToString() : String.Empty;
 
-            tbxPkgPrice.Text = Decimal.Round(Package.PkgBasePrice, 2).ToString();
-            tbxPkgDesc.Text = Package.PkgDesc.ToString();
-            tbxPkgName.Text = Package.PkgName.ToString();
+            tbxPkgPrice.Text = Decimal.Round(PackageSelected.PkgBasePrice, 2).ToString();
+            tbxPkgDesc.Text = PackageSelected.PkgDesc.ToString();
+            tbxPkgName.Text = PackageSelected.PkgName.ToString();
 
-            tbxPkgEndDate.CustomFormat = Object.Equals(Package.PkgEndDate, null) ? " " : "dd/MM/yyyy";
-            tbxPkgEndDate.Text = Package.PkgStartDate.ToString();
+            dtpPkgEndDate.CustomFormat = Object.Equals(PackageSelected.PkgEndDate, null) ? " " : DateTimePickerFormat;
+            dtpPkgEndDate.Text = PackageSelected.PkgStartDate.ToString();
 
-            tbxPkgStartDate.CustomFormat = Object.Equals(Package.PkgStartDate, null) ? " " : "dd/MM/yyyy";
-            tbxPkgStartDate.Text = Package.PkgStartDate.ToString();
+            dtpPkgStartDate.CustomFormat = Object.Equals(PackageSelected.PkgStartDate, null) ? " " : DateTimePickerFormat;
+            dtpPkgStartDate.Text = PackageSelected.PkgStartDate.ToString();
 
             return true;
         }
 
-        private void DisplayPackageIds()
+        private void PopulatePackageIds()
         {
             if (PackageIds.Count > 0)
                 PackageIds.Clear();
@@ -104,37 +119,43 @@ namespace ThreadedProject2
             cmbPackageIds.DisplayMember = nameof(Package.PkgName);
             cmbPackageIds.ValueMember = nameof(Package.PackageId);
 
+            //bind combo box to product names
+            cmbProductList.DataSource = Products;
+            cmbProductList.DisplayMember = nameof(Product.ProdName);
+            cmbProductList.ValueMember = nameof(Product.ProductID);
+
+
             //Bind the datagrid to the list containing all relavent products
-            dtgProducts.DataSource = Products;
+            dtgProducts.DataSource = PackageProducts;
 
-            DisplayPackageIds();
+            PopulateProducts();
+            PopulatePackageIds();
 
-            if (Int32.TryParse(cmbPackageIds.Text, out int id))
+            if (PackageIds.Count > 0)
             {
-                DisplayPackage(id);
-                DisplayPackageProducts(id);
+                DisplayPackage(PackageIds[0].PackageId);
+                DisplayPackageProducts(PackageIds[0].PackageId);
             }
         }
 
 
         /// <summary>
-        /// An event that occurs when the user selects a package ID
+        /// An event that occurs when the user clicks on the package lookup combo box
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cmbPackageIds_Click(object sender, EventArgs e)
         {
-            DisplayPackageIds();
+            PopulatePackageIds();
         }
 
 
+        private void cmbProductList_Click(object sender, EventArgs e)
+        {
+            PopulateProducts();
+        }
 
-        /// <summary>
-        /// An event that occurs when the user selected a package id
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cmbPackageIds_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cmbPackageIds_SelectedValueChanged(object sender, EventArgs e)
         {
             if (Object.Equals((sender as ComboBox).SelectedItem, null))
                 return;
@@ -144,27 +165,66 @@ namespace ThreadedProject2
             //update the form fields
             DisplayPackage(package.PackageId);
             DisplayPackageProducts(package.PackageId);
+        
         }
-        #endregion Events
+        #endregion events
 
-        private void btnAddRemovePackage_Click(object sender, EventArgs e)
+        private void btnClearEndDate_Click(object sender, EventArgs e)
         {
-
+            PackageSelected.PkgEndDate = null;
+            dtpPkgEndDate.CustomFormat = " ";
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgEndDate), PackageSelected);
         }
 
-        private void btnAddRemoveProduct_Click(object sender, EventArgs e)
+        private void btnClearStartDate_Click(object sender, EventArgs e)
         {
-            if (MdiParent.Controls.Count < 1)
-                return;
+            PackageSelected.PkgStartDate = null;
+            dtpPkgStartDate.CustomFormat = " ";
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgStartDate), PackageSelected);
+        }
 
-            Form formToRemove = null;
+        private void tbxPkgCommission_Leave(object sender, EventArgs e)
+        {
+            string commission = (sender as TextBox).Text;
+            PackageSelected.PkgAgencyCommission = (commission != null) ? Convert.ToDecimal(commission) : (decimal?)null;
 
-            foreach (Form form in MdiParent.Controls)
-                formToRemove = form;
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgAgencyCommission), PackageSelected);
+        }
 
-            Parent.Controls.Remove(formToRemove);
+        private void tbxPkgPrice_Leave(object sender, EventArgs e)
+        {
+            string price = (sender as TextBox).Text;
+            PackageSelected.PkgBasePrice = Convert.ToDecimal(price);
 
-            Parent.Controls.Add(new frmProductSupplierManager());
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgBasePrice), PackageSelected);
+        }
+
+        private void tbxPkgDesc_Leave(object sender, EventArgs e)
+        {
+            string desc = (sender as TextBox).Text;
+            PackageSelected.PkgDesc = desc;
+
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgDesc), PackageSelected);
+        }
+
+        private void tbxPkgName_Leave(object sender, EventArgs e)
+        {
+            string name = (sender as TextBox).Text;
+            PackageSelected.PkgName = name;
+
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgName), PackageSelected);
+        }
+
+        private void dtpPkgStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            dtpPkgStartDate.CustomFormat = DateTimePickerFormat;
+
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgName), PackageSelected);
+        }
+
+        private void dtpPkgEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            dtpPkgEndDate.CustomFormat = DateTimePickerFormat;
         }
     }
 }

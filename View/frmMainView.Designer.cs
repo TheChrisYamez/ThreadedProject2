@@ -182,7 +182,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Travel Package System";
-            this.TopMost = true;
+            this.Load += new System.EventHandler(this.frmMainView_Load);
             this.tlpMain.ResumeLayout(false);
             this.tlpMenu.ResumeLayout(false);
             this.ResumeLayout(false);

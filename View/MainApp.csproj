@@ -88,10 +88,6 @@
       <Project>{0EE84BAE-3777-4218-B643-6FF676231629}</Project>
       <Name>ProductManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProductSupplierManager\ProductSupplierManager.csproj">
-      <Project>{5C45F226-EA97-445C-9269-695CF3291927}</Project>
-      <Name>ProductSupplierManager</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SupplierManager\SupplierManager.csproj">
       <Project>{4CF3392D-C63B-46A0-9C4C-6ABEFA5A3FCD}</Project>
       <Name>SupplierManager</Name>

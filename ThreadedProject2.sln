@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductSupplierManager", "P
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DABF9D32-F014-4D68-B451-68F297C644EE}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\Desktop\FormRelations.vsdx = ..\..\..\..\..\Desktop\FormRelations.vsdx
+		..\..\..\..\ThreadedProject2\FormRelations.vsdx = ..\..\..\..\ThreadedProject2\FormRelations.vsdx
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApp", "View\MainApp.csproj", "{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}"

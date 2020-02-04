@@ -15,7 +15,7 @@ namespace DBConnector
         {
             List<Product> products = new List<Product>();
             Product prod = null;
-            SqlConnection con = TravelExpertsDB.GetConnection();
+            SqlConnection con = TravelExpertsConnection.GetConnection();
             string selectStatement = "SELECT ProductID, ProdName " +
                                      "FROM Products " +
                                      "ORDER BY ProductID";
@@ -46,7 +46,7 @@ namespace DBConnector
         public static Product GetProduct(int productID)
         {
             Product prod = null;
-            SqlConnection con = TravelExpertsDB.GetConnection();
+            SqlConnection con = TravelExpertsConnection.GetConnection();
             string selectStatement = "SELECT ProductID, ProdName " +
                                      "FROM Orders " +
                                      "WHERE OrderID = @OrderID";
@@ -81,7 +81,7 @@ namespace DBConnector
         /// <returns>generated CustomerID</returns>
         public static int AddProduct(Product prod)
         {
-            SqlConnection con = TravelExpertsDB.GetConnection();
+            SqlConnection con = TravelExpertsConnection.GetConnection();
             string insertStatement = "INSERT INTO Products (ProductID, ProdName) " +
                                      "VALUES(@ProductID, @ProdName)";
             SqlCommand cmd = new SqlCommand(insertStatement, con);
@@ -111,7 +111,7 @@ namespace DBConnector
 
         public static bool DeleteProduct(Product prod)
         {
-            SqlConnection con = TravelExpertsDB.GetConnection();
+            SqlConnection con = TravelExpertsConnection.GetConnection();
             string deleteStatement = "DELETE FROM Products " +
                                      "WHERE ProductID = @ProductID " + // to identify the customer to be  deleted
                                      "AND ProdName = @ProdNAme "; // remaining conditions - to ensure optimistic concurrency
@@ -145,7 +145,7 @@ namespace DBConnector
         /// <returns>indicator of success</returns>
         public static bool UpdateProduct(Product oldProd, Product newProd)
         {
-            SqlConnection con = TravelExpertsDB.GetConnection();
+            SqlConnection con = TravelExpertsConnection.GetConnection();
             string updateStatement = "UPDATE Products " +
                                      "SET ProductID = @NewProductID, " +
                                      "    ProdName = @NewProdName, " +

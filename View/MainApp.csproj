@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5C45F226-EA97-445C-9269-695CF3291927}</ProjectGuid>
+    <ProjectGuid>{26EA82C9-587E-4C55-BBAB-5759FD8B9C1D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ProductSupplierManager</RootNamespace>
-    <AssemblyName>ProductSupplierManager</AssemblyName>
+    <RootNamespace>MainApp</RootNamespace>
+    <AssemblyName>MainApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,16 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmProductSupplierManager.cs">
+    <Compile Include="CustomControls\FlatButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="frmMainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmProductSupplierManager.Designer.cs">
-      <DependentUpon>frmProductSupplierManager.cs</DependentUpon>
+    <Compile Include="frmMainView.Designer.cs">
+      <DependentUpon>frmMainView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmProductSupplierManager.resx">
-      <DependentUpon>frmProductSupplierManager.cs</DependentUpon>
+    <EmbeddedResource Include="frmMainView.resx">
+      <DependentUpon>frmMainView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -65,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +82,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProductManager\ProductManager.csproj">
+      <Project>{0EE84BAE-3777-4218-B643-6FF676231629}</Project>
+      <Name>ProductManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupplierManager\SupplierManager.csproj">
+      <Project>{4CF3392D-C63B-46A0-9C4C-6ABEFA5A3FCD}</Project>
+      <Name>SupplierManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThreadedProject2\PackageManager.csproj">
+      <Project>{588A2BD9-8EFD-49DE-9F86-421A41A32F47}</Project>
+      <Name>PackageManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

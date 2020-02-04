@@ -52,8 +52,12 @@
     <Compile Include="frmPackageManager.Designer.cs">
       <DependentUpon>frmPackageManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="PackageValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmPackageManager.resx">
+      <DependentUpon>frmPackageManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +66,10 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\DBConnector.Package.datasource" />
+    <None Include="Properties\DataSources\DBConnector.Product.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -81,6 +88,16 @@
       <Project>{14eb42e7-b9d9-4d88-ae35-a494c4c17842}</Project>
       <Name>DBConnector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProductSupplierManager\ProductSupplierManager.csproj">
+      <Project>{5C45F226-EA97-445C-9269-695CF3291927}</Project>
+      <Name>ProductSupplierManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\btnclear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

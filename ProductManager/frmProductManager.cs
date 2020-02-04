@@ -33,7 +33,7 @@ namespace ProductManager
        
         private void frmProductManager_Load(object sender, EventArgs e)
         {
-            private DataTable SupplierData(string selectStatement)
+            DataTable SupplierData(string selectStatement)
             {
                 string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))

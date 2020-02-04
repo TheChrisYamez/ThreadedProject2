@@ -1,14 +1,8 @@
-﻿using System;
+﻿
 using DBConnector;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ProductSupplierManager;
 
 namespace ThreadedProject2
 {
@@ -51,7 +45,7 @@ namespace ThreadedProject2
                 Products.Clear();
 
             //add to binding list
-            foreach (Product product in ProductDB.GetProducts())
+            foreach (Product product in ProductDB.GetAllProducts())
                 Products.Add(product);
         }
 

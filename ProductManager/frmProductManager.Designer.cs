@@ -228,7 +228,7 @@
             this.productDataGridView.RowTemplate.Height = 24;
             this.productDataGridView.Size = new System.Drawing.Size(600, 195);
             this.productDataGridView.TabIndex = 1;
-            this.productDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productDataGridView_CellContentClick);
+            //this.productDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productDataGridView_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 

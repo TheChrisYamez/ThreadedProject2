@@ -34,14 +34,9 @@ namespace ProductManager
         private void frmProductManager_Load(object sender, EventArgs e)
         {
 
-        
-        private void frmProductManager_Load(object sender, EventArgs e)
-        {
-            
-
+    
        
-        private void frmProductManager_Load(object sender, EventArgs e)
-        {
+      
            
             try
             {

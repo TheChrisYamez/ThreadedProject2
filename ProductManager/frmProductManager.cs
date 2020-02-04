@@ -21,8 +21,31 @@ namespace ProductManager
         List<Product> products; // list of all customers
         Product oldProducts; // to preserve data before update
 
+<<<<<<< Updated upstream
         private void frmProductManager_Load(object sender, EventArgs e)
         {
+=======
+        private DataTable SupplierData(string selectStatement)
+        {
+            string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand(selectStatement))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        cmd.Connection = con;
+                        DataTable dt = new DataTable();
+                        sda.Fill(dt);
+                        return dt;
+                    }
+                }
+            }
+        }
+        private void frmProductManager_Load(object sender, EventArgs e)
+        {
+            
+>>>>>>> Stashed changes
             try
             {
                 products = ProductDB.GetAllProducts();

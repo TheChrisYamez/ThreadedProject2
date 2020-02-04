@@ -16,14 +16,10 @@ namespace DBConnector
                 List<Supplier> suppliers = new List<Supplier>();
                 Supplier sup = null;
                 SqlConnection con = TravelExpertsDB.GetConnection();
-                string selectStatement = "SELECT s.SupName, p.ProdName  " +
-                                         "FROM Suppliers s " +
-                                         "INNER JOIN Products_Suppliers ps " +
-                                         "on s.SupplierID = ps.ProductSupplierID " +
-                                         "INNER JOIN Products p " +
-                                         "on ps.ProductID = p.ProductID " +
-                                         "WHERE SupplierID = @SupplierID";
-            SqlCommand cmd = new SqlCommand(selectStatement, con);
+                string selectStatement = "SELECT SupplierID, SupName " +
+                                         "FROM Suppliers " +
+                                         "ORDER BY SupplierID";
+                SqlCommand cmd = new SqlCommand(selectStatement, con);
 
                 try
                 {

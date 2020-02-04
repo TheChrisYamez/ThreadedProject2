@@ -12,5 +12,13 @@ namespace DBConnector
 
         public string ProdName { get; set; }
 
+
+        public Product CopyProduct()
+        {
+            Product copy = new Product();
+            copy.ProductID = ProductID; ; // this customer's ID
+            copy.ProdName = ProdName;
+            return copy;
+        }
     }
 }

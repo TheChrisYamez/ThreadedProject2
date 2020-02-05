@@ -30,26 +30,14 @@ namespace ProductManager
 
         Product oldProducts; // to preserve data before update
 
-       
+
         private void frmProductManager_Load(object sender, EventArgs e)
         {
-            DataTable SupplierData(string selectStatement)
-            {
-                string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(constr))
-                {
-                    using (SqlCommand cmd = new SqlCommand(selectStatement))
-                    {
-                        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                        {
-                            cmd.Connection = con;
-                            DataTable dt = new DataTable();
-                            sda.Fill(dt);
-                            return dt;
-                        }
-                    }
-                }
-            }
+
+    
+       
+      
+           
             try
             {
                 productsuppliers = ProductSupplierDB.GetAllProductSuppliers();

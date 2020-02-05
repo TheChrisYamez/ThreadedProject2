@@ -47,7 +47,7 @@ namespace DBConnector
             {
                 Supplier sup = null;
                 SqlConnection con = TravelExpertsDB.GetConnection();
-                string selectStatement = "SELECT s.SupName, p.ProdName,0  " +
+                string selectStatement = "SELECT s.SupName, p.ProdName,  " +
                                          "FROM Suppliers s " +
                                          "INNER JOIN Products_Suppliers ps " +
                                          "on s.SupplierID = ps.ProductSupplierID " +

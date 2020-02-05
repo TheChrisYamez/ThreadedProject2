@@ -24,9 +24,9 @@ namespace ProductManager
 
         List<Product> products; // list of all products
         List<Supplier> suppliers; // list of all suppliers
-        Supplier supplier;
-        List<ProductSupplier> productsuppliers; // list of all productsuppliers
-        const int EDIT_BUTTON_INDX = 3; // column in the grid that contains Edit buttons
+       // Supplier supplier;
+        //List<ProductSupplier> productsuppliers; // list of all productsuppliers
+        const int EDIT_BUTTON_INDX = 2; // column in the grid that contains Edit buttons
         Product oldProduct;
 
 
@@ -58,24 +58,7 @@ namespace ProductManager
 
         private void productDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == EDIT_BUTTON_INDX)
-            {
-                oldProduct = products[e.RowIndex].CopyProduct(); // make a  separate copy before update
-                FrmUpdate updateForm = new FrmUpdate();
-                updateForm.product = products[e.RowIndex]; // "pass" current customer to the form
-                updateForm.oldProduct = oldProduct;        // same for the original customer data
-                DialogResult result = updateForm.ShowDialog(); // display modal second form
-                if (result == DialogResult.OK) // update accepted
-                {
-                    // refresh the grid view
-                    CurrencyManager cm = (CurrencyManager)productDataGridView.BindingContext[products];
-                    cm.Refresh();
-                }
-                else // update cancelled
-                {
-                    products[e.RowIndex] = oldProduct; // revert to the old values
-                }
-            }
+            
         }
 
         private void prodNameComboBox_SelectedValueChanged(object sender, EventArgs e)
@@ -106,6 +89,28 @@ namespace ProductManager
         {
             frmProductSupplierManager f2 = new frmProductSupplierManager();
             f2.ShowDialog(); // Shows Form2
+        }
+
+        private void productDataGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == EDIT_BUTTON_INDX)
+            {
+                oldProduct = products[e.RowIndex].CopyProduct(); // make a  separate copy before update
+                FrmUpdate updateForm = new FrmUpdate();
+                updateForm.product = products[e.RowIndex]; // "pass" current customer to the form
+                updateForm.oldProduct = oldProduct;        // same for the original customer data
+                DialogResult result = updateForm.ShowDialog(); // display modal second form
+                if (result == DialogResult.OK) // update accepted
+                {
+                    // refresh the grid view
+                    CurrencyManager cm = (CurrencyManager)productDataGridView.BindingContext[products];
+                    cm.Refresh();
+                }
+                else // update cancelled
+                {
+                    products[e.RowIndex] = oldProduct; // revert to the old values
+                }
+            }
         }
     }
 }

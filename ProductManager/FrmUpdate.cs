@@ -26,5 +26,19 @@ namespace ProductManager
             productBindingSource.Clear();
             productBindingSource.Add(product); // bind to the current product
         }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            bool success = ProductDB.UpdateProduct(oldProduct, product);
+            if (success)
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                this.DialogResult = DialogResult.Retry;
+            }
+
+        }
     }
 }

@@ -147,10 +147,9 @@ namespace DBConnector
         {
             SqlConnection con = TravelExpertsConnection.GetConnection();
             string updateStatement = "UPDATE Products " +
-                                     "SET ProductID = @NewProductID, " +
-                                     "    ProdName = @NewProdName, " +
-                                     "WHERE ProductID = @OldProductID " +
-                                     "AND ProdName = @OldProdName ";
+                                     "SET ProdName = @NewProdName " +
+                                     "WHERE ProductID = @OldProductID ";
+                                     
             SqlCommand cmd = new SqlCommand(updateStatement, con);
             cmd.Parameters.AddWithValue("@NewProductID", newProd.ProductID);
             cmd.Parameters.AddWithValue("@NewProdName", newProd.ProdName);

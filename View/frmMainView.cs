@@ -66,6 +66,17 @@ namespace MainApp
             PackageManager = new frmPackageManager();
             ProductManager = new frmProductManager();
             SupplierManager = new frmSupplierManager();
+        }
+
+        ///resolves issues with double buffering
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParams = base.CreateParams;
+                handleParams.ExStyle |= 0x02000000;
+                return handleParams;
+            }
 
         }
 
@@ -113,17 +124,31 @@ namespace MainApp
 
         private void btnPackages_Click(object sender, EventArgs e)
         {
+            UpdateSelectedButtonBackground((Control)sender);
             OpenForm(PackageManager);
         }
 
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
+            UpdateSelectedButtonBackground((Control)sender);
             OpenForm(ProductManager);
+        }
+
+        private void UpdateSelectedButtonBackground(Control button)
+        {
+            this.SuspendLayout();
+            foreach (Control btn in tlpMenu.Controls)
+                if (btn is FlatButton)
+                    btn.BackColor = Color.FromArgb(36, 36, 68);
+
+            button.BackColor = Color.FromArgb(0, 0, 10);
+            this.ResumeLayout();
         }
 
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
+            UpdateSelectedButtonBackground((Control)sender);
             OpenForm(SupplierManager);
         }
 
@@ -132,11 +157,10 @@ namespace MainApp
             foreach (Form activeForm in pnlForms.Controls)
             {
                 activeForm.Hide();
-                activeForm.SuspendLayout();
             }
 
-            form.ResumeLayout();
             form.Show();
+
         }
 
         private void frmMainView_Load(object sender, EventArgs e)
@@ -147,7 +171,12 @@ namespace MainApp
             InitializeMenuForms(SupplierManager);
 
             OpenForm(PackageManager);
-
+            UpdateSelectedButtonBackground(btnPackages);
         }
     }
+
+    /// <summary>
+    /// Fix flickering when redrawing the ball/tiles. this sets Double Buffered on all controls.
+    /// </summary>
+
 }

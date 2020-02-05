@@ -31,37 +31,17 @@ namespace ThreadedProject2
         /// </summary>
         BindingList<Product> Products = new BindingList<Product>();
 
+        /// <summary>
+        /// the list of products in the database
+        /// </summary>
+        BindingList<Product> ProductSuppliers = new BindingList<Product>();
+
+
         private string DateTimePickerFormat = "dd/MM/yyyy";
 
         public frmPackageManager()
         {
             InitializeComponent();
-        }
-
-        ///resolves issues with double buffering
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams handleParams = base.CreateParams;
-                handleParams.ExStyle |= 0x02000000;
-                return handleParams;
-            }
-
-        }
-
-        private void PopulateProducts()
-        {
-            List<Product> productList = ProductDB.GetAllProducts();
-
-            if (Products.Count > 0)
-                Products.Clear();
-
-            foreach (Product product in productList)
-                Products.Add(product);
-
-
-
         }
 
         #region Methods
@@ -73,6 +53,35 @@ namespace ThreadedProject2
             //get the products linked to the package
             foreach (Product product in PackageDB.GetPackageProductsById(packageID))
                 PackageProducts.Add(product);
+        }
+
+        /// <summary>
+        /// resolves issues with double buffering and flickering when shwoing the form
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParams = base.CreateParams;
+                handleParams.ExStyle |= 0x02000000;
+                return handleParams;
+            }
+
+        }
+
+
+        /// <summary>
+        /// Get the products for the package from the DB
+        /// </summary>
+        private void GetProducts()
+        {
+            List<Product> productList = ProductDB.GetAllProducts();
+
+            if (Products.Count > 0)
+                Products.Clear();
+
+            foreach (Product product in productList)
+                Products.Add(product);
         }
 
         /// <summary>
@@ -118,7 +127,10 @@ namespace ThreadedProject2
             return true;
         }
 
-        private void PopulatePackageIds()
+        /// <summary>
+        /// Gets the package id's from the DB
+        /// </summary>
+        private void GetPackageIds()
         {
             if (PackageIds.Count > 0)
                 PackageIds.Clear();
@@ -131,9 +143,15 @@ namespace ThreadedProject2
         #endregion Methods  
 
         #region Events
+
+        /// <summary>
+        /// Event occurs when form is first loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmPackageManager_Load(object sender, EventArgs e)
         {
-         
+
             //bind combo box to package id's
             cmbPackageIds.DataSource = PackageIds;
             cmbPackageIds.DisplayMember = nameof(Package.PkgName);
@@ -147,10 +165,11 @@ namespace ThreadedProject2
             //Bind the datagrid to the list containing all relavent products
             dtgProducts.DataSource = PackageProducts;
 
-            PopulateProducts();
-            PopulatePackageIds();
+            //get product and package data from db
+            GetProducts();
+            GetPackageIds();
 
-
+            //display package and products
             if (PackageIds.Count > 0)
             {
                 DisplayPackage(PackageIds[0].PackageId);
@@ -158,6 +177,11 @@ namespace ThreadedProject2
             }
         }
 
+        /// <summary>
+        /// Event occurs when user selects a package id from the combo box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbPackageIds_SelectedValueChanged(object sender, EventArgs e)
         {
             if (Object.Equals((sender as ComboBox).SelectedItem, null))
@@ -165,34 +189,72 @@ namespace ThreadedProject2
 
             Package package = (Package)(sender as ComboBox).SelectedItem;
 
-            //update the form fields
+            //Display the package and products
             DisplayPackage(package.PackageId);
             DisplayPackageProducts(package.PackageId);
-        
+
         }
 
+        /// <summary>
+        /// Event occurs when user presses clear on end date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearEndDate_Click(object sender, EventArgs e)
         {
+            //clear end date field and updated db
             PackageSelected.PkgEndDate = null;
             dtpPkgEndDate.CustomFormat = " ";
             PackageDB.UpdatePackagePropertyById(nameof(Package.PkgEndDate), PackageSelected);
         }
 
+        /// <summary>
+        /// Event occurs when user presses clear on start date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearStartDate_Click(object sender, EventArgs e)
         {
+            //clear start date field and updated db
             PackageSelected.PkgStartDate = null;
             dtpPkgStartDate.CustomFormat = " ";
             PackageDB.UpdatePackagePropertyById(nameof(Package.PkgStartDate), PackageSelected);
         }
 
+        private void dtpPkgStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            dtpPkgStartDate.CustomFormat = DateTimePickerFormat;
+
+            DateTime date = (sender as DateTimePicker).Value;
+            PackageSelected.PkgStartDate = date;
+
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgStartDate), PackageSelected);
+        }
+
+        private void dtpPkgEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            dtpPkgEndDate.CustomFormat = DateTimePickerFormat;
+
+            DateTime date = (sender as DateTimePicker).Value;
+            PackageSelected.PkgEndDate = date;
+
+            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgEndDate), PackageSelected);
+        }
+
+        /// <summary>
+        /// Event occurs after leaving the text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbxPkgCommission_Leave(object sender, EventArgs e)
         {
             string commission = (sender as TextBox).Text;
+
             PackageSelected.PkgAgencyCommission = (commission != null) ? Convert.ToDecimal(commission) : (decimal?)null;
 
             PackageDB.UpdatePackagePropertyById(nameof(Package.PkgAgencyCommission), PackageSelected);
-        }
 
+        }
         private void tbxPkgPrice_Leave(object sender, EventArgs e)
         {
             string price = (sender as TextBox).Text;
@@ -217,47 +279,20 @@ namespace ThreadedProject2
             PackageDB.UpdatePackagePropertyById(nameof(Package.PkgName), PackageSelected);
         }
 
-        private void dtpPkgStartDate_ValueChanged(object sender, EventArgs e)
-        {
-            dtpPkgStartDate.CustomFormat = DateTimePickerFormat;
-
-            DateTime date = (sender as DateTimePicker).Value;
-            PackageSelected.PkgStartDate = date;
-
-            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgStartDate), PackageSelected);
-        }
-
-        private void dtpPkgEndDate_ValueChanged(object sender, EventArgs e)
-        {
-            dtpPkgEndDate.CustomFormat = DateTimePickerFormat;
-
-            DateTime date = (sender as DateTimePicker).Value;
-            PackageSelected.PkgEndDate = date;
-
-            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgEndDate), PackageSelected);
-        }
 
         /// <summary>
-        /// Event occurs when form is SHOWN to the display
+        /// Event occurs when form visibility is changed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void frmPackageManager_VisibleChanged(object sender, EventArgs e)
         {
-            //check if form is visible and refresh its data
+            //check if form is visible and display it
             if (this.Visible)
-                RefreshFormData();
+                GetProducts();
         }
 
-        private void RefreshFormData()
-        {
-            PopulateProducts();
-        }
 
         #endregion events
-
-
-
-
     }
 }

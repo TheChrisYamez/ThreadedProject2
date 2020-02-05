@@ -11,7 +11,7 @@ namespace DBConnector
     {
             public static SqlConnection GetConnection()
             {
-                string connectionString = @"Data Source=SAIT224915\SQLEXPRESS;Initial Catalog=TravelExperts;Integrated Security=True";
+                string connectionString = @"Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=TravelExperts;Integrated Security=True";
                 SqlConnection con = new SqlConnection(connectionString);
                 return con;
             }

@@ -81,15 +81,16 @@
             this.tlpMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tlpMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpMenu.Controls.Add(this.btnSuppliers, 2, 0);
+            this.tlpMenu.Controls.Add(this.btnSuppliers, 0, 0);
             this.tlpMenu.Controls.Add(this.btnProducts, 1, 0);
-            this.tlpMenu.Controls.Add(this.btnPackages, 0, 0);
+            this.tlpMenu.Controls.Add(this.btnPackages, 2, 0);
             this.tlpMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMenu.Location = new System.Drawing.Point(4, 47);
             this.tlpMenu.Margin = new System.Windows.Forms.Padding(4);
             this.tlpMenu.Name = "tlpMenu";
             this.tlpMenu.RowCount = 1;
             this.tlpMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.tlpMenu.Size = new System.Drawing.Size(1059, 64);
             this.tlpMenu.TabIndex = 1;
             // 
@@ -98,14 +99,16 @@
             this.btnSuppliers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(68)))));
             this.btnSuppliers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSuppliers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSuppliers.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnSuppliers.FlatAppearance.BorderSize = 0;
             this.btnSuppliers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSuppliers.Font = new System.Drawing.Font("MS Reference Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSuppliers.ForeColor = System.Drawing.Color.White;
-            this.btnSuppliers.Location = new System.Drawing.Point(13, 0);
+            this.btnSuppliers.ForeColor = System.Drawing.Color.LightGray;
+            this.btnSuppliers.Location = new System.Drawing.Point(719, 0);
             this.btnSuppliers.Margin = new System.Windows.Forms.Padding(13, 0, 13, 0);
             this.btnSuppliers.Name = "btnSuppliers";
             this.btnSuppliers.OnHoverBackColor = System.Drawing.Color.DarkOrchid;
+            this.btnSuppliers.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSuppliers.Size = new System.Drawing.Size(327, 64);
             this.btnSuppliers.TabIndex = 2;
             this.btnSuppliers.Text = "Suppliers";
@@ -117,10 +120,11 @@
             this.btnProducts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(68)))));
             this.btnProducts.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProducts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnProducts.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnProducts.FlatAppearance.BorderSize = 0;
             this.btnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProducts.Font = new System.Drawing.Font("MS Reference Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProducts.ForeColor = System.Drawing.Color.White;
+            this.btnProducts.ForeColor = System.Drawing.Color.LightGray;
             this.btnProducts.Location = new System.Drawing.Point(366, 0);
             this.btnProducts.Margin = new System.Windows.Forms.Padding(13, 0, 13, 0);
             this.btnProducts.Name = "btnProducts";
@@ -133,14 +137,15 @@
             // 
             // btnPackages
             // 
-            this.btnPackages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(68)))));
+            this.btnPackages.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(10)))));
             this.btnPackages.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPackages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPackages.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.btnPackages.FlatAppearance.BorderSize = 0;
             this.btnPackages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPackages.Font = new System.Drawing.Font("MS Reference Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPackages.ForeColor = System.Drawing.Color.White;
-            this.btnPackages.Location = new System.Drawing.Point(719, 0);
+            this.btnPackages.ForeColor = System.Drawing.Color.LightGray;
+            this.btnPackages.Location = new System.Drawing.Point(13, 0);
             this.btnPackages.Margin = new System.Windows.Forms.Padding(13, 0, 13, 0);
             this.btnPackages.Name = "btnPackages";
             this.btnPackages.OnHoverBackColor = System.Drawing.Color.DarkOrchid;
@@ -175,6 +180,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(68)))));
             this.ClientSize = new System.Drawing.Size(1067, 726);
             this.Controls.Add(this.tlpMain);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(4);

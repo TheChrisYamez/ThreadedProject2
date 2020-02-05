@@ -281,7 +281,7 @@
             this.cmbProductList.Sorted = true;
             this.cmbProductList.TabIndex = 61;
             this.cmbProductList.TabStop = false;
-            this.cmbProductList.Click += new System.EventHandler(this.cmbProductList_Click);
+
             // 
             // btnAddProduct
             // 
@@ -511,6 +511,7 @@
             this.Name = "frmPackageManager";
             this.Text = "Package Manager";
             this.Load += new System.EventHandler(this.frmPackageManager_Load);
+            this.VisibleChanged += new System.EventHandler(this.frmPackageManager_VisibleChanged);
             this.panel1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgProducts)).EndInit();

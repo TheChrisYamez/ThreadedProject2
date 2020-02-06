@@ -112,5 +112,28 @@ namespace ProductManager
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRefreshSuppliers_Click(object sender, EventArgs e)
+        {
+            //ComboBox cmb = (ComboBox)sender;
+            //if (cmb.SelectedValue == null)
+            //    return;
+
+
+            //suppliers = SupplierDB.GetSupplier((int)cmb.SelectedValue);
+            //supplierDataGridView.DataSource = suppliers;
+
+        }
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            frmAdd f3 = new frmAdd();
+            f3.ShowDialog(); // Shows add form
+        }
     }
 }

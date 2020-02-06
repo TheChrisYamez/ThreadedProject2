@@ -49,6 +49,7 @@
             this.productSupplierBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnGoToEditSuppliersPage = new System.Windows.Forms.Button();
             this.btnAddProduct = new System.Windows.Forms.Button();
+            this.btnRefreshSuppliers = new System.Windows.Forms.Button();
             prodNameLabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -79,9 +80,9 @@
             label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             label1.Location = new System.Drawing.Point(622, 107);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(256, 29);
+            label1.Size = new System.Drawing.Size(263, 29);
             label1.TabIndex = 5;
-            label1.Text = "Suppliers per Product";
+            label1.Text = "Suppliers per Product:";
             // 
             // label2
             // 
@@ -244,12 +245,24 @@
             this.btnAddProduct.TabIndex = 9;
             this.btnAddProduct.Text = "Add Product";
             this.btnAddProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
+            // 
+            // btnRefreshSuppliers
+            // 
+            this.btnRefreshSuppliers.Location = new System.Drawing.Point(911, 494);
+            this.btnRefreshSuppliers.Name = "btnRefreshSuppliers";
+            this.btnRefreshSuppliers.Size = new System.Drawing.Size(113, 45);
+            this.btnRefreshSuppliers.TabIndex = 10;
+            this.btnRefreshSuppliers.Text = "Refresh Suppliers";
+            this.btnRefreshSuppliers.UseVisualStyleBackColor = true;
+            this.btnRefreshSuppliers.Click += new System.EventHandler(this.btnRefreshSuppliers_Click);
             // 
             // frmProductManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1312, 571);
+            this.Controls.Add(this.btnRefreshSuppliers);
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(label3);
             this.Controls.Add(this.btnGoToEditSuppliersPage);
@@ -292,6 +305,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn Edit;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
         private System.Windows.Forms.Button btnAddProduct;
+        private System.Windows.Forms.Button btnRefreshSuppliers;
     }
 }
 

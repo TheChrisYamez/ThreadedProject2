@@ -12,8 +12,9 @@ namespace ProductSupplierManager
 
         public int ProductSupplierId { get; set; }
 
-        public string SuppliedID { get; set; }
+        public int ProductID { get; set; }
 
-        public string Name { get; set; }
+        public string SupplierID { get; set; }
+
     }
 }

@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAdd.Designer.cs">
+      <DependentUpon>frmAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProductManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAdd.resx">
+      <DependentUpon>frmAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProductManager.resx">
       <DependentUpon>frmProductManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +105,14 @@
     <ProjectReference Include="..\DBConnector\DBConnector.csproj">
       <Project>{14eb42e7-b9d9-4d88-ae35-a494c4c17842}</Project>
       <Name>DBConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductSupplierManager\ProductSupplierManager.csproj">
+      <Project>{5c45f226-ea97-445c-9269-695cf3291927}</Project>
+      <Name>ProductSupplierManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SupplierManager\SupplierManager.csproj">
+      <Project>{4cf3392d-c63b-46a0-9c4c-6abefa5a3fcd}</Project>
+      <Name>SupplierManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

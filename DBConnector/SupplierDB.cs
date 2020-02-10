@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -168,6 +169,50 @@ namespace DBConnector
                     con.Close();
                 }
             }
+
+        /// <summary>
+        /// <author> Brian Appleton</author>
+        /// Gets all the suppliers attached to a specific product
+        /// </summary>
+        /// <param name="productId">the product id</param>
+        /// <returns></returns>
+        public static BindingList<Supplier> GetProductSuppliers(int productId)
+        {
+            BindingList<Supplier> suppliers = new BindingList<Supplier>();
+
+            SqlConnection con = TravelExpertsDB.GetConnection();
+
+            string selectStatement = "SELECT s.SupName,s.SupplierId,pr.ProdName " +
+                                    "FROM Products_Suppliers as p " +
+                                    "JOIN Suppliers as s " +
+                                    "ON s.SupplierId = p.SupplierId " +
+                                    "JOIN Products as pr " +
+                                    "ON pr.ProductId = p.ProductId " +
+                                    "WHERE pr.ProductID = @ProductID";
+
+
+            using (SqlCommand cmd = new SqlCommand(selectStatement, con))
+            {
+                cmd.Parameters.AddWithValue("@ProductID", productId);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read()) // found a customer
+                {
+                    Supplier supplier = new Supplier()
+                    {
+                        SupName = (string)reader[0],
+                        SupplierID = (int)reader[1],
+                        ProdName = (string)reader[2],
+                    };
+
+                    suppliers.Add(supplier);
+                }
+
+                return suppliers;
+            }
         }
+    }
     }
 

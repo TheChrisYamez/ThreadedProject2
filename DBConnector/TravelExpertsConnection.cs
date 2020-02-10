@@ -12,7 +12,6 @@ using System.Threading.Tasks;
  * 
  * this class is for getting the connection to the travel experts DB
  *
- *
  */
 
 namespace DBConnector

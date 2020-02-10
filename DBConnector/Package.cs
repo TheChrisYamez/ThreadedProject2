@@ -12,7 +12,6 @@ using System.Threading.Tasks;
  * 
  * this class is for holdinmg product objects from a sql db
  *
- *
  */
 
 namespace DBConnector

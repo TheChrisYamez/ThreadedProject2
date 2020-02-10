@@ -19,9 +19,10 @@ using System.Threading.Tasks;
 
 namespace DBConnector
 {
+    [DataObject(true)]
     public static class PackageDB
     {
-
+        [DataObjectMethod(DataObjectMethodType.Select)]
         /// <summary>
         /// Gets all packages from the database and returns a list of package objects
         /// </summary>
@@ -100,7 +101,7 @@ namespace DBConnector
         }
 
         /// <summary>
-        /// Gets all package ids
+        /// Gets all package ids and names
         /// </summary>
         /// <returns></returns>
         public static List<Package> GetPartialPackage()

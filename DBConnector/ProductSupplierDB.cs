@@ -79,43 +79,6 @@ namespace DBConnector
             }
             return prodsup;
         }
-
-        /// <summary>
-        /// Gets all the suppliers attached to a specific product
-        /// </summary>
-        /// <param name="productId">the product id</param>
-        /// <returns></returns>
-        public static BindingList<ProductSupplier> GetProductSuppliers(int productId)
-        {
-            BindingList<ProductSupplier> suppliers = new BindingList<ProductSupplier>();
-
-            SqlConnection con = TravelExpertsDB.GetConnection();
-
-            string selectStatement = "SELECT ProductSupplierID, ProductID, SupplierID " +
-                                     "FROM Products_Suppliers " +
-                                     "WHERE ProductID = @ProductID";
-
-            using (SqlCommand cmd = new SqlCommand(selectStatement, con))
-            {
-                cmd.Parameters.AddWithValue("@ProductID", productId);
-
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                while (reader.Read()) // found a customer
-                {
-                    ProductSupplier prodsup = new ProductSupplier();
-                    prodsup.ProductSupplierID = (int)reader["ProductSupplierID"];
-                    prodsup.ProductID = (int)reader["ProductID"];
-                    prodsup.SupplierID = (int)reader["SupplierID"];
-
-                    suppliers.Add(prodsup);
-                }
-
-                return suppliers;
-            }
-        }
-
         public static int AddProductSupplier(ProductSupplier prodsup)
         {
             SqlConnection con = TravelExpertsDB.GetConnection();

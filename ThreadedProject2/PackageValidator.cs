@@ -155,7 +155,27 @@ namespace ThreadedProject2
             if (isValid)
                 ErrorProvider.SetError(endDateDTP, String.Empty);
 
-            return true;
+            return isValid;
+        }
+
+        /// <summary>
+        /// Validates a package commission value
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <returns></returns>
+        public static bool IsPackageProductSupplierExisting(PackageProductSupplier packageProductSupplier)
+        {
+            bool isExisting;
+
+            if (PackageProductSupplierDB.Get(packageProductSupplier) != null)
+            {
+                MessageBox.Show("This product is already part of the package","Notification",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                isExisting = true;
+            }
+            else
+                isExisting = false;
+
+            return isExisting;
         }
     }
 }

@@ -21,13 +21,6 @@ namespace DBConnector
     /// </summary>
     public class Package
     {
-
-        //        Make sure that you validate the data before creating the package:
-        //a)	the Agency Commission cannot be greater than the Base Price
-        //b)	the Package End Date must be later than Package Start Date
-        //c)	Package Name and Package Description cannot be null
-
-
         /// <summary>
         /// The non-nullable package ID
         /// </summary>

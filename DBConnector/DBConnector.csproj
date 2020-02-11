@@ -45,8 +45,12 @@
   <ItemGroup>
     <Compile Include="Package.cs" />
     <Compile Include="PackageDB.cs" />
+    <Compile Include="PackageProductSupplier.cs" />
+    <Compile Include="PackageProductSupplierDB.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductDB.cs" />
+    <Compile Include="ProductExtended.cs" />
+    <Compile Include="ProductExtendedDB.cs" />
     <Compile Include="ProductSupplier.cs" />
     <Compile Include="ProductSupplierDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,7 +60,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="TravelExpertsConnection.cs" />
-
     <Compile Include="Supplier.cs" />
     <Compile Include="SupplierDB.cs" />
     <Compile Include="TravelExpertsDB.cs" />

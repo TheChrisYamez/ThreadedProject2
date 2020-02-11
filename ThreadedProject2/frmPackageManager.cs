@@ -23,7 +23,7 @@ namespace ThreadedProject2
         /// <summary>
         /// the list of products attached to a package
         /// </summary>
-        readonly BindingList<Product> PackageProducts = new BindingList<Product>();
+        readonly BindingList<ProductExtended> PackageProducts = new BindingList<ProductExtended>();
 
         /// <summary>
         /// the list of products in the database
@@ -33,7 +33,7 @@ namespace ThreadedProject2
         /// <summary>
         /// The list of suppliers associated to a specific product
         /// </summary>
-        BindingList<Supplier> ProductSuppliers = new BindingList<Supplier>();
+        BindingList<Supplier> Suppliers = new BindingList<Supplier>();
 
         /// <summary>
         /// the date time format associated with the data time picker
@@ -53,12 +53,15 @@ namespace ThreadedProject2
         /// <param name="packageID"></param>
         private void GetBindedPackageProducts(int packageID)
         {
+            //clear any existing products attached to the package
             if (!Object.Equals(PackageProducts, null))
                 PackageProducts.Clear();
 
             //get the products linked to the package
-            foreach (Product product in PackageDB.GetPackageProductsById(packageID))
+            foreach (ProductExtended product in ProductExtendedDB.GetPackageProductsById(packageID))
                 PackageProducts.Add(product);
+
+
         }
 
         /// <summary>
@@ -88,6 +91,7 @@ namespace ThreadedProject2
             //get products and add to binding list
             foreach (Product product in productList)
                 Products.Add(product);
+
         }
 
         /// <summary>
@@ -101,7 +105,7 @@ namespace ThreadedProject2
                     return false;
  
             //get the package data
-            PackageSelected = PackageDB.GetPackageById(packageId);
+            PackageSelected = PackageDB.GetById(packageId);
 
             //Update non-nullable properties
             tbxPackageId.Text = PackageSelected.PackageId.ToString();
@@ -159,7 +163,7 @@ namespace ThreadedProject2
                 PackageIds.Clear();
 
             //add to binding list
-            foreach (Package package in PackageDB.GetPartialPackage())
+            foreach (Package package in PackageDB.GetAll())
                 PackageIds.Add(package);
 
             //set combo box back to selected index
@@ -174,11 +178,11 @@ namespace ThreadedProject2
         {
             if (Object.Equals(productId, null))
                 return;
-
-            ProductSuppliers.Clear();
+            
+            Suppliers.Clear();
 
             foreach (Supplier supplier in SupplierDB.GetProductSuppliers((int)productId))
-                ProductSuppliers.Add(supplier);
+                Suppliers.Add(supplier);
         }
 
 
@@ -191,7 +195,7 @@ namespace ThreadedProject2
             PackageIds.Remove(PackageSelected);
             PackageSelected.PkgName = packageName;
 
-            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgName), PackageSelected);
+            PackageDB.UpdatePropertyById(nameof(Package.PkgName), PackageSelected);
         }
 
 
@@ -204,7 +208,7 @@ namespace ThreadedProject2
                 DateTime date = dtp.Value;
                 PackageSelected.PkgEndDate = date;
 
-                PackageDB.UpdatePackagePropertyById(nameof(Package.PkgEndDate), PackageSelected);
+                PackageDB.UpdatePropertyById(nameof(Package.PkgEndDate), PackageSelected);
             }
             else
             {
@@ -212,7 +216,7 @@ namespace ThreadedProject2
                 PackageSelected.PkgEndDate = null;
                 dtp.Value = DateTime.Now.AddDays(1);
                 dtp.CustomFormat = " ";
-                PackageDB.UpdatePackagePropertyById(nameof(Package.PkgEndDate), PackageSelected);
+                PackageDB.UpdatePropertyById(nameof(Package.PkgEndDate), PackageSelected);
             }
         }
 
@@ -231,7 +235,7 @@ namespace ThreadedProject2
                 DateTime date = dateTimePicker.Value;
                 PackageSelected.PkgStartDate = date;
 
-                PackageDB.UpdatePackagePropertyById(nameof(Package.PkgStartDate), PackageSelected);
+                PackageDB.UpdatePropertyById(nameof(Package.PkgStartDate), PackageSelected);
 
                 //enable editing end date;
                 dtpPkgEndDate.Enabled = true;
@@ -240,13 +244,53 @@ namespace ThreadedProject2
                 //clear start date field and End Date Field and updated db
                 PackageSelected.PkgStartDate = null;
                 dateTimePicker.CustomFormat = " ";
-                PackageDB.UpdatePackagePropertyById(nameof(Package.PkgStartDate), PackageSelected);
+                PackageDB.UpdatePropertyById(nameof(Package.PkgStartDate), PackageSelected);
 
                 SetEndDate(dtpPkgEndDate, true);
 
                 //disable editing of end date
                 dtpPkgEndDate.Enabled = false;
             }
+        }
+
+        /// <summary>
+        /// Add a product to the package
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <param name="supplierId"></param>
+        private void AddProductToPackage(int productId, int supplierId)
+        {
+            //get the productsupplier from db
+            ProductSupplier productSupplier = ProductSupplierDB.GetProductSupplier(productId, supplierId);
+
+            //create the PPS to be added to db
+            PackageProductSupplier newPackagePS = new PackageProductSupplier()
+            {
+                ProductSupplierId = productSupplier.ProductSupplierID,
+                PackageId = PackageSelected.PackageId
+            };
+
+            if (!PackageValidator.IsPackageProductSupplierExisting(newPackagePS))
+            {
+                //add packageproductsupplier to db
+                PackageProductSupplierDB.Add(newPackagePS);
+
+                GetBindedPackageProducts(PackageSelected.PackageId);
+            }
+        }
+
+        /// <summary>
+        /// Removes a product within a package from the database
+        /// </summary>
+        /// <param name="packageId"></param>
+        /// <param name="productSupplierId"></param>
+        private void RemoveProductInPackage(int packageId, int productSupplierId)
+        {
+            ProductExtendedDB.DeletePackageProductsById(packageId, productSupplierId);
+
+
+            GetBindedPackageProducts(PackageSelected.PackageId);
+
         }
 
         /// <summary>
@@ -299,7 +343,8 @@ namespace ThreadedProject2
             cmbProductList.DisplayMember = nameof(Product.ProdName);
             cmbProductList.ValueMember = nameof(Product.ProductID);
 
-            cmbSuppliers.DataSource = ProductSuppliers;
+            //bind combo box to suppliers
+            cmbSuppliers.DataSource = Suppliers;
             cmbSuppliers.DisplayMember = nameof(Supplier.SupName);
             cmbSuppliers.ValueMember = nameof(Supplier.SupplierID);
 
@@ -309,6 +354,9 @@ namespace ThreadedProject2
             //get product and package data from db
             GetBindedProductsAll();
             GetBindedPackageIds();
+            
+            //get product suppliers linked to the selected combo box product
+            GetBindedProductSuppliers((int?)cmbProductList.SelectedValue);
 
             //display package and products
             if (PackageIds.Count > 0)
@@ -424,7 +472,7 @@ namespace ThreadedProject2
             string desc = (sender as TextBox).Text;
             PackageSelected.PkgDesc = desc;
 
-            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgDesc), PackageSelected);
+            PackageDB.UpdatePropertyById(nameof(Package.PkgDesc), PackageSelected);
         }
 
         /// <summary>
@@ -436,7 +484,7 @@ namespace ThreadedProject2
         {
             PackageSelected.PkgBasePrice = Convert.ToDecimal((sender as TextBox).Text);
 
-            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgBasePrice), PackageSelected);
+            PackageDB.UpdatePropertyById(nameof(Package.PkgBasePrice), PackageSelected);
         }
         /// <summary>
         /// event occurs when price is being validated
@@ -461,7 +509,7 @@ namespace ThreadedProject2
 
             PackageSelected.PkgAgencyCommission = (commission != null) ? Convert.ToDecimal(commission) : (decimal?)null;
 
-            PackageDB.UpdatePackagePropertyById(nameof(Package.PkgAgencyCommission), PackageSelected);
+            PackageDB.UpdatePropertyById(nameof(Package.PkgAgencyCommission), PackageSelected);
         }
 
         /// <summary>
@@ -513,5 +561,35 @@ namespace ThreadedProject2
 
         #endregion events
 
+        private void btnRemoveProduct_Click(object sender, EventArgs e)
+        {
+            //nothing selected, return.
+            if (dtgProducts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            ProductExtended product = (ProductExtended)dtgProducts.CurrentRow.DataBoundItem;
+
+            RemoveProductInPackage(PackageSelected.PackageId, product.ProductSupplierId);
+        }
+
+
+
+        private void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            //get from combo boxes
+            Product product = (Product)cmbProductList.SelectedItem;
+            Supplier supplier = (Supplier)cmbSuppliers.SelectedItem;
+
+            AddProductToPackage(product.ProductID, supplier.SupplierID);
+        }
+
+
+
+        private void dtgProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

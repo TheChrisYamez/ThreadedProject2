@@ -113,15 +113,6 @@ namespace MainApp
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            PackageManager.Dispose();
-            SupplierManager.Dispose();
-            ProductManager.Dispose();
-            Application.Exit();
-
-        }
-
         private void btnPackages_Click(object sender, EventArgs e)
         {
             UpdateSelectedButtonBackground((Control)sender);
@@ -135,6 +126,22 @@ namespace MainApp
             OpenForm(ProductManager);
         }
 
+
+        private void MinimizeApplicationWindow()
+        {
+            this.Visible = false;
+            notifyIcon1.Visible = true;
+            notifyIcon1.ShowBalloonTip(1000);
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void RestoreApplicationWindow()
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.Visible = true;
+            notifyIcon1.Visible = false;
+            this.Show();
+        }
         private void UpdateSelectedButtonBackground(Control button)
         {
             this.SuspendLayout();
@@ -173,10 +180,25 @@ namespace MainApp
             OpenForm(PackageManager);
             UpdateSelectedButtonBackground(btnPackages);
         }
+
+        private void btnClose_Click_1(object sender, EventArgs e)
+        {
+            PackageManager.Dispose();
+            SupplierManager.Dispose();
+            ProductManager.Dispose();
+            Application.Exit();
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            MinimizeApplicationWindow();
+
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            RestoreApplicationWindow();
+        }
+
     }
-
-    /// <summary>
-    /// Fix flickering when redrawing the ball/tiles. this sets Double Buffered on all controls.
-    /// </summary>
-
 }

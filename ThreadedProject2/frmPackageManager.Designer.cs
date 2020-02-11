@@ -41,36 +41,36 @@
             this.pnlEntireForm = new System.Windows.Forms.Panel();
             this.pnlProductName = new System.Windows.Forms.Panel();
             this.lblPackageName = new System.Windows.Forms.Label();
+            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gbxProducts = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.dtgProducts = new System.Windows.Forms.DataGridView();
+            this.productIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productSupplierIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productExtendedBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cmbProductList = new System.Windows.Forms.ComboBox();
             this.btnAddProduct = new System.Windows.Forms.Button();
             this.cmbSuppliers = new System.Windows.Forms.ComboBox();
-            this.dtgProducts = new System.Windows.Forms.DataGridView();
-            this.cmbProductList = new System.Windows.Forms.ComboBox();
             this.btnRemoveProduct = new System.Windows.Forms.Button();
             this.gbxPackageDetails = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tbxPackageId = new System.Windows.Forms.TextBox();
+            this.dtpPkgEndDate = new System.Windows.Forms.DateTimePicker();
+            this.packageBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dtpPkgStartDate = new System.Windows.Forms.DateTimePicker();
             this.tbxPkgCommission = new System.Windows.Forms.TextBox();
             this.tbxPkgPrice = new System.Windows.Forms.TextBox();
             this.tbxPkgDesc = new System.Windows.Forms.TextBox();
+            this.tbxPackageId = new System.Windows.Forms.TextBox();
             this.tbxPkgName = new System.Windows.Forms.TextBox();
-            this.dtpPkgStartDate = new System.Windows.Forms.DateTimePicker();
-            this.dtpPkgEndDate = new System.Windows.Forms.DateTimePicker();
+            this.lblNameCharCount = new System.Windows.Forms.Label();
             this.btnClearStartDate = new System.Windows.Forms.Button();
             this.btnClearEndDate = new System.Windows.Forms.Button();
-            this.lblNameCharCount = new System.Windows.Forms.Label();
             this.lblDescCharCount = new System.Windows.Forms.Label();
             this.gbxLookupPackage = new System.Windows.Forms.GroupBox();
             this.cmbPackageIds = new System.Windows.Forms.ComboBox();
             this.btnAddRemovePackage = new System.Windows.Forms.Button();
-            this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productSupplierIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productExtendedBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.packageBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             pkgEndDateLabel = new System.Windows.Forms.Label();
             pkgStartDateLabel = new System.Windows.Forms.Label();
             pkgNameLabel = new System.Windows.Forms.Label();
@@ -82,15 +82,15 @@
             label2 = new System.Windows.Forms.Label();
             this.pnlEntireForm.SuspendLayout();
             this.pnlProductName.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.gbxProducts.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgProducts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productExtendedBindingSource)).BeginInit();
             this.gbxPackageDetails.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.gbxLookupPackage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productExtendedBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.packageBindingSource)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.gbxLookupPackage.SuspendLayout();
             this.SuspendLayout();
             // 
             // pkgEndDateLabel
@@ -171,6 +171,30 @@
             packageIdLabel1.TabIndex = 70;
             packageIdLabel1.Text = "Package Id:";
             // 
+            // label1
+            // 
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label1.Location = new System.Drawing.Point(2, 6);
+            label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(85, 25);
+            label1.TabIndex = 71;
+            label1.Text = "Product:";
+            // 
+            // label2
+            // 
+            label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label2.Location = new System.Drawing.Point(2, 41);
+            label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(90, 25);
+            label2.TabIndex = 72;
+            label2.Text = "Supplier:";
+            // 
             // pnlEntireForm
             // 
             this.pnlEntireForm.Controls.Add(this.pnlProductName);
@@ -211,6 +235,10 @@
             this.lblPackageName.Text = "ProductName";
             this.lblPackageName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // productBindingSource
+            // 
+            this.productBindingSource.DataSource = typeof(DBConnector.Product);
+            // 
             // gbxProducts
             // 
             this.gbxProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -228,34 +256,29 @@
             this.gbxProducts.TabStop = false;
             this.gbxProducts.Text = "Package Products";
             // 
-            // btnAddProduct
+            // tableLayoutPanel2
             // 
-            this.btnAddProduct.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAddProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddProduct.Location = new System.Drawing.Point(470, 2);
-            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAddProduct.Name = "btnAddProduct";
-            this.btnAddProduct.Size = new System.Drawing.Size(108, 33);
-            this.btnAddProduct.TabIndex = 59;
-            this.btnAddProduct.TabStop = false;
-            this.btnAddProduct.Text = "Add";
-            this.btnAddProduct.UseVisualStyleBackColor = true;
-            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
-            // 
-            // cmbSuppliers
-            // 
-            this.cmbSuppliers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbSuppliers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbSuppliers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSuppliers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbSuppliers.FormattingEnabled = true;
-            this.cmbSuppliers.Location = new System.Drawing.Point(141, 40);
-            this.cmbSuppliers.Name = "cmbSuppliers";
-            this.cmbSuppliers.Size = new System.Drawing.Size(236, 28);
-            this.cmbSuppliers.Sorted = true;
-            this.cmbSuppliers.TabIndex = 62;
-            this.cmbSuppliers.TabStop = false;
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.48718F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.51282F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 112F));
+            this.tableLayoutPanel2.Controls.Add(label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cmbProductList, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnAddProduct, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(label2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.cmbSuppliers, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.dtgProducts, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btnRemoveProduct, 2, 3);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 21);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(580, 501);
+            this.tableLayoutPanel2.TabIndex = 63;
             // 
             // dtgProducts
             // 
@@ -292,6 +315,43 @@
             this.dtgProducts.TabStop = false;
             this.dtgProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgProducts_CellContentClick);
             // 
+            // productIDDataGridViewTextBoxColumn
+            // 
+            this.productIDDataGridViewTextBoxColumn.DataPropertyName = "ProductID";
+            this.productIDDataGridViewTextBoxColumn.HeaderText = "ProductID";
+            this.productIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.productIDDataGridViewTextBoxColumn.Name = "productIDDataGridViewTextBoxColumn";
+            this.productIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // prodNameDataGridViewTextBoxColumn
+            // 
+            this.prodNameDataGridViewTextBoxColumn.DataPropertyName = "ProdName";
+            this.prodNameDataGridViewTextBoxColumn.HeaderText = "ProdName";
+            this.prodNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.prodNameDataGridViewTextBoxColumn.Name = "prodNameDataGridViewTextBoxColumn";
+            this.prodNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // SupplierName
+            // 
+            this.SupplierName.DataPropertyName = "SupplierName";
+            this.SupplierName.HeaderText = "SupplierName";
+            this.SupplierName.MinimumWidth = 6;
+            this.SupplierName.Name = "SupplierName";
+            this.SupplierName.ReadOnly = true;
+            // 
+            // productSupplierIdDataGridViewTextBoxColumn
+            // 
+            this.productSupplierIdDataGridViewTextBoxColumn.DataPropertyName = "ProductSupplierId";
+            this.productSupplierIdDataGridViewTextBoxColumn.HeaderText = "ProductSupplierId";
+            this.productSupplierIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.productSupplierIdDataGridViewTextBoxColumn.Name = "productSupplierIdDataGridViewTextBoxColumn";
+            this.productSupplierIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.productSupplierIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // productExtendedBindingSource
+            // 
+            this.productExtendedBindingSource.DataSource = typeof(DBConnector.ProductExtended);
+            // 
             // cmbProductList
             // 
             this.cmbProductList.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -305,21 +365,50 @@
             this.cmbProductList.Location = new System.Drawing.Point(140, 2);
             this.cmbProductList.Margin = new System.Windows.Forms.Padding(2);
             this.cmbProductList.Name = "cmbProductList";
-            this.cmbProductList.Size = new System.Drawing.Size(326, 33);
+            this.cmbProductList.Size = new System.Drawing.Size(325, 33);
             this.cmbProductList.Sorted = true;
             this.cmbProductList.TabIndex = 61;
             this.cmbProductList.TabStop = false;
             this.cmbProductList.SelectedIndexChanged += new System.EventHandler(this.cmbProductList_SelectedIndexChanged);
+            // 
+            // btnAddProduct
+            // 
+            this.btnAddProduct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAddProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddProduct.Location = new System.Drawing.Point(469, 2);
+            this.btnAddProduct.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddProduct.Name = "btnAddProduct";
+            this.btnAddProduct.Size = new System.Drawing.Size(109, 33);
+            this.btnAddProduct.TabIndex = 59;
+            this.btnAddProduct.TabStop = false;
+            this.btnAddProduct.Text = "Add";
+            this.btnAddProduct.UseVisualStyleBackColor = true;
+            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
+            // 
+            // cmbSuppliers
+            // 
+            this.cmbSuppliers.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbSuppliers.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbSuppliers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSuppliers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbSuppliers.FormattingEnabled = true;
+            this.cmbSuppliers.Location = new System.Drawing.Point(141, 40);
+            this.cmbSuppliers.Name = "cmbSuppliers";
+            this.cmbSuppliers.Size = new System.Drawing.Size(236, 28);
+            this.cmbSuppliers.Sorted = true;
+            this.cmbSuppliers.TabIndex = 62;
+            this.cmbSuppliers.TabStop = false;
             // 
             // btnRemoveProduct
             // 
             this.btnRemoveProduct.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRemoveProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemoveProduct.Location = new System.Drawing.Point(470, 333);
+            this.btnRemoveProduct.Location = new System.Drawing.Point(469, 333);
             this.btnRemoveProduct.Margin = new System.Windows.Forms.Padding(2);
             this.btnRemoveProduct.Name = "btnRemoveProduct";
-            this.btnRemoveProduct.Size = new System.Drawing.Size(108, 38);
+            this.btnRemoveProduct.Size = new System.Drawing.Size(109, 38);
             this.btnRemoveProduct.TabIndex = 60;
             this.btnRemoveProduct.TabStop = false;
             this.btnRemoveProduct.Text = "Remove Selected";
@@ -389,18 +478,39 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(387, 495);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // tbxPackageId
+            // dtpPkgEndDate
             // 
-            this.tbxPackageId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packageBindingSource, "PackageId", true));
-            this.tbxPackageId.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbxPackageId.Enabled = false;
-            this.tbxPackageId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxPackageId.Location = new System.Drawing.Point(7, 32);
-            this.tbxPackageId.Margin = new System.Windows.Forms.Padding(2);
-            this.tbxPackageId.Name = "tbxPackageId";
-            this.tbxPackageId.ReadOnly = true;
-            this.tbxPackageId.Size = new System.Drawing.Size(128, 30);
-            this.tbxPackageId.TabIndex = 71;
+            this.tableLayoutPanel1.SetColumnSpan(this.dtpPkgEndDate, 2);
+            this.dtpPkgEndDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.packageBindingSource, "PkgEndDate", true));
+            this.dtpPkgEndDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtpPkgEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpPkgEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpPkgEndDate.Location = new System.Drawing.Point(8, 397);
+            this.dtpPkgEndDate.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
+            this.dtpPkgEndDate.MinDate = new System.DateTime(2000, 2, 5, 0, 0, 0, 0);
+            this.dtpPkgEndDate.Name = "dtpPkgEndDate";
+            this.dtpPkgEndDate.Size = new System.Drawing.Size(281, 30);
+            this.dtpPkgEndDate.TabIndex = 50;
+            this.dtpPkgEndDate.ValueChanged += new System.EventHandler(this.dtpPkgEndDate_ValueChanged);
+            // 
+            // packageBindingSource
+            // 
+            this.packageBindingSource.DataSource = typeof(DBConnector.Package);
+            // 
+            // dtpPkgStartDate
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.dtpPkgStartDate, 2);
+            this.dtpPkgStartDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.packageBindingSource, "PkgStartDate", true));
+            this.dtpPkgStartDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtpPkgStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpPkgStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpPkgStartDate.Location = new System.Drawing.Point(8, 336);
+            this.dtpPkgStartDate.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
+            this.dtpPkgStartDate.MinDate = new System.DateTime(2000, 2, 5, 0, 0, 0, 0);
+            this.dtpPkgStartDate.Name = "dtpPkgStartDate";
+            this.dtpPkgStartDate.Size = new System.Drawing.Size(281, 30);
+            this.dtpPkgStartDate.TabIndex = 49;
+            this.dtpPkgStartDate.ValueChanged += new System.EventHandler(this.dtpPkgStartDate_ValueChanged);
             // 
             // tbxPkgCommission
             // 
@@ -442,6 +552,19 @@
             this.tbxPkgDesc.Validating += new System.ComponentModel.CancelEventHandler(this.tbxPkgDesc_Validating);
             this.tbxPkgDesc.Validated += new System.EventHandler(this.tbxPkgDesc_Validated);
             // 
+            // tbxPackageId
+            // 
+            this.tbxPackageId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.packageBindingSource, "PackageId", true));
+            this.tbxPackageId.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbxPackageId.Enabled = false;
+            this.tbxPackageId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxPackageId.Location = new System.Drawing.Point(7, 32);
+            this.tbxPackageId.Margin = new System.Windows.Forms.Padding(2);
+            this.tbxPackageId.Name = "tbxPackageId";
+            this.tbxPackageId.ReadOnly = true;
+            this.tbxPackageId.Size = new System.Drawing.Size(128, 30);
+            this.tbxPackageId.TabIndex = 71;
+            // 
             // tbxPkgName
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.tbxPkgName, 2);
@@ -456,35 +579,19 @@
             this.tbxPkgName.Validating += new System.ComponentModel.CancelEventHandler(this.tbxPkgName_Validating);
             this.tbxPkgName.Validated += new System.EventHandler(this.tbxPkgName_Validated);
             // 
-            // dtpPkgStartDate
+            // lblNameCharCount
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.dtpPkgStartDate, 2);
-            this.dtpPkgStartDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.packageBindingSource, "PkgStartDate", true));
-            this.dtpPkgStartDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtpPkgStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpPkgStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpPkgStartDate.Location = new System.Drawing.Point(8, 336);
-            this.dtpPkgStartDate.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
-            this.dtpPkgStartDate.MinDate = new System.DateTime(2000, 2, 5, 0, 0, 0, 0);
-            this.dtpPkgStartDate.Name = "dtpPkgStartDate";
-            this.dtpPkgStartDate.Size = new System.Drawing.Size(281, 30);
-            this.dtpPkgStartDate.TabIndex = 49;
-            this.dtpPkgStartDate.ValueChanged += new System.EventHandler(this.dtpPkgStartDate_ValueChanged);
-            // 
-            // dtpPkgEndDate
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.dtpPkgEndDate, 2);
-            this.dtpPkgEndDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.packageBindingSource, "PkgEndDate", true));
-            this.dtpPkgEndDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtpPkgEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpPkgEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpPkgEndDate.Location = new System.Drawing.Point(8, 397);
-            this.dtpPkgEndDate.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
-            this.dtpPkgEndDate.MinDate = new System.DateTime(2000, 2, 5, 0, 0, 0, 0);
-            this.dtpPkgEndDate.Name = "dtpPkgEndDate";
-            this.dtpPkgEndDate.Size = new System.Drawing.Size(281, 30);
-            this.dtpPkgEndDate.TabIndex = 50;
-            this.dtpPkgEndDate.ValueChanged += new System.EventHandler(this.dtpPkgEndDate_ValueChanged);
+            this.lblNameCharCount.AutoSize = true;
+            this.lblNameCharCount.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblNameCharCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameCharCount.ForeColor = System.Drawing.Color.Gray;
+            this.lblNameCharCount.Location = new System.Drawing.Point(322, 89);
+            this.lblNameCharCount.Margin = new System.Windows.Forms.Padding(0);
+            this.lblNameCharCount.Name = "lblNameCharCount";
+            this.lblNameCharCount.Size = new System.Drawing.Size(60, 36);
+            this.lblNameCharCount.TabIndex = 72;
+            this.lblNameCharCount.Text = "label1";
+            this.lblNameCharCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnClearStartDate
             // 
@@ -515,20 +622,6 @@
             this.btnClearEndDate.Text = "Clear Date";
             this.btnClearEndDate.UseVisualStyleBackColor = true;
             this.btnClearEndDate.Click += new System.EventHandler(this.btnClearEndDate_Click);
-            // 
-            // lblNameCharCount
-            // 
-            this.lblNameCharCount.AutoSize = true;
-            this.lblNameCharCount.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblNameCharCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNameCharCount.ForeColor = System.Drawing.Color.Gray;
-            this.lblNameCharCount.Location = new System.Drawing.Point(322, 89);
-            this.lblNameCharCount.Margin = new System.Windows.Forms.Padding(0);
-            this.lblNameCharCount.Name = "lblNameCharCount";
-            this.lblNameCharCount.Size = new System.Drawing.Size(60, 36);
-            this.lblNameCharCount.TabIndex = 72;
-            this.lblNameCharCount.Text = "label1";
-            this.lblNameCharCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblDescCharCount
             // 
@@ -584,99 +677,6 @@
             this.btnAddRemovePackage.Text = "New";
             this.btnAddRemovePackage.UseVisualStyleBackColor = true;
             // 
-            // SupplierName
-            // 
-            this.SupplierName.DataPropertyName = "SupplierName";
-            this.SupplierName.HeaderText = "SupplierName";
-            this.SupplierName.MinimumWidth = 6;
-            this.SupplierName.Name = "SupplierName";
-            this.SupplierName.ReadOnly = true;
-            // 
-            // productBindingSource
-            // 
-            this.productBindingSource.DataSource = typeof(DBConnector.Product);
-            // 
-            // productIDDataGridViewTextBoxColumn
-            // 
-            this.productIDDataGridViewTextBoxColumn.DataPropertyName = "ProductID";
-            this.productIDDataGridViewTextBoxColumn.HeaderText = "ProductID";
-            this.productIDDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.productIDDataGridViewTextBoxColumn.Name = "productIDDataGridViewTextBoxColumn";
-            this.productIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // prodNameDataGridViewTextBoxColumn
-            // 
-            this.prodNameDataGridViewTextBoxColumn.DataPropertyName = "ProdName";
-            this.prodNameDataGridViewTextBoxColumn.HeaderText = "ProdName";
-            this.prodNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.prodNameDataGridViewTextBoxColumn.Name = "prodNameDataGridViewTextBoxColumn";
-            this.prodNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // productSupplierIdDataGridViewTextBoxColumn
-            // 
-            this.productSupplierIdDataGridViewTextBoxColumn.DataPropertyName = "ProductSupplierId";
-            this.productSupplierIdDataGridViewTextBoxColumn.HeaderText = "ProductSupplierId";
-            this.productSupplierIdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.productSupplierIdDataGridViewTextBoxColumn.Name = "productSupplierIdDataGridViewTextBoxColumn";
-            this.productSupplierIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.productSupplierIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // productExtendedBindingSource
-            // 
-            this.productExtendedBindingSource.DataSource = typeof(DBConnector.ProductExtended);
-            // 
-            // packageBindingSource
-            // 
-            this.packageBindingSource.DataSource = typeof(DBConnector.Package);
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.48718F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.51282F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
-            this.tableLayoutPanel2.Controls.Add(label1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.cmbProductList, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnAddProduct, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(label2, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.cmbSuppliers, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.dtgProducts, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.btnRemoveProduct, 2, 3);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 21);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(580, 501);
-            this.tableLayoutPanel2.TabIndex = 63;
-            // 
-            // label1
-            // 
-            label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label1.Location = new System.Drawing.Point(2, 6);
-            label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(85, 25);
-            label1.TabIndex = 71;
-            label1.Text = "Product:";
-            // 
-            // label2
-            // 
-            label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label2.Location = new System.Drawing.Point(2, 41);
-            label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(90, 25);
-            label2.TabIndex = 72;
-            label2.Text = "Supplier:";
-            // 
             // frmPackageManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -689,17 +689,17 @@
             this.VisibleChanged += new System.EventHandler(this.frmPackageManager_VisibleChanged);
             this.pnlEntireForm.ResumeLayout(false);
             this.pnlProductName.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             this.gbxProducts.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgProducts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productExtendedBindingSource)).EndInit();
             this.gbxPackageDetails.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.gbxLookupPackage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productExtendedBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.packageBindingSource)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.gbxLookupPackage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

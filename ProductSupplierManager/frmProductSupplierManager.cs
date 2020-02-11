@@ -13,9 +13,7 @@ namespace ProductSupplierManager
     public partial class frmProductSupplierManager : Form
     {
         List<ProductSupplier> productSuppliers;
-        ProductSupplier
 
-        List<>
         public frmProductSupplierManager()
         {
             InitializeComponent();
@@ -26,10 +24,16 @@ namespace ProductSupplierManager
             try
             {
                 productSuppliers = ProductSupplierDB.GetAllProductSuppliers();
+                ProductSupplierDataGrid.DataSource = productSuppliers;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error while loading Product Supplier Data: " + ex.Message,
+                    ex.GetType().ToString());
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ProductSupplierDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

@@ -43,7 +43,7 @@ namespace DBConnector
             }
             return products;
         }
-        public static Product GetProduct(int productID)
+        public static Product GetProduct(int orderID)
         {
             Product prod = null;
             SqlConnection con = TravelExpertsConnection.GetConnection();
@@ -51,7 +51,38 @@ namespace DBConnector
                                      "FROM Orders " +
                                      "WHERE OrderID = @OrderID";
             SqlCommand cmd = new SqlCommand(selectStatement, con);
-            cmd.Parameters.AddWithValue("@OrderID", productID); // value comes from the method's argument
+            cmd.Parameters.AddWithValue("@OrderID", orderID); // value comes from the method's argument
+            try
+            {
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
+                if (reader.Read()) // found a customer
+                {
+                    prod = new Product();
+                    prod.ProductID = (int)reader["ProductID"];
+                    prod.ProdName = reader["ProdName"].ToString();
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return prod;
+        }
+
+        public static Product GetProductById(int productId)
+        {
+            Product prod = null;
+            SqlConnection con = TravelExpertsConnection.GetConnection();
+            string selectStatement = "SELECT ProductID, ProdName " +
+                                     "FROM Products " +
+                                     "WHERE ProductID = @ProductID";
+            SqlCommand cmd = new SqlCommand(selectStatement, con);
+            cmd.Parameters.AddWithValue("@ProductID", productId); // value comes from the method's argument
             try
             {
                 con.Open();

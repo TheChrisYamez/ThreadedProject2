@@ -77,5 +77,10 @@ namespace ProductManager
                 }
             }
         }
+
+        private void prodNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

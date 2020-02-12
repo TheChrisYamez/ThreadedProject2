@@ -52,8 +52,8 @@
     <Compile Include="frmProductSupplierManager.Designer.cs">
       <DependentUpon>frmProductSupplierManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductSupplier.cs" />
-    <Compile Include="ProductSupplierDB.cs" />
+    <Compile Include="archive\ProductSupplier.cs" />
+    <Compile Include="archive\ProductSupplierDB.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TravelExpertsDB.cs" />
@@ -69,6 +69,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\DBConnector.ProductSupplier.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -81,6 +82,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBConnector\DBConnector.csproj">
+      <Project>{14EB42E7-B9D9-4D88-AE35-A494C4C17842}</Project>
+      <Name>DBConnector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

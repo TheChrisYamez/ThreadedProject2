@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace ProductSupplierManager
+namespace ProductSupplierManager.Archive
 {
+    [Obsolete]
     class ProductSupplierDB
     {
         public  static List<ProductSupplier> GetAllProductSuppliers()

@@ -176,5 +176,21 @@ namespace DBConnector
                     con.Close();
                 }
             }
+
+        public static List<ProductSupplier> GetAllProductSuppliers()
+        {
+            List<ProductSupplier> productsuppliers = new List<ProductSupplier>();
+            ProductSupplier prodsup = null;
+
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return productsuppliers;
+
         }
     }

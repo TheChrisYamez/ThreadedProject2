@@ -51,6 +51,8 @@
             this.Edit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.prodNameComboBox = new System.Windows.Forms.ComboBox();
             this.supplierDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productSupplierDataGridView = new System.Windows.Forms.DataGridView();
             this.ProductSupplierID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,8 +61,6 @@
             this.productSupplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productDBBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productSupplierBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             prodNameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingNavigator)).BeginInit();
             this.productBindingNavigator.SuspendLayout();
@@ -228,7 +228,6 @@
             this.productDataGridView.RowTemplate.Height = 24;
             this.productDataGridView.Size = new System.Drawing.Size(600, 195);
             this.productDataGridView.TabIndex = 1;
-            //this.productDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productDataGridView_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -268,6 +267,7 @@
             this.prodNameComboBox.Size = new System.Drawing.Size(121, 24);
             this.prodNameComboBox.TabIndex = 4;
             this.prodNameComboBox.ValueMember = "ProductID";
+            this.prodNameComboBox.SelectedIndexChanged += new System.EventHandler(this.prodNameComboBox_SelectedIndexChanged);
             // 
             // supplierDataGridView
             // 
@@ -283,6 +283,21 @@
             this.supplierDataGridView.RowTemplate.Height = 24;
             this.supplierDataGridView.Size = new System.Drawing.Size(523, 220);
             this.supplierDataGridView.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "SupName";
+            this.dataGridViewTextBoxColumn4.HeaderText = "SupName";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 125;
+            // 
+            // ProdName
+            // 
+            this.ProdName.HeaderText = "ProdName";
+            this.ProdName.MinimumWidth = 6;
+            this.ProdName.Name = "ProdName";
+            this.ProdName.Width = 125;
             // 
             // supplierBindingSource
             // 
@@ -339,21 +354,6 @@
             // productSupplierBindingSource1
             // 
             this.productSupplierBindingSource1.DataSource = typeof(DBConnector.ProductSupplier);
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "SupName";
-            this.dataGridViewTextBoxColumn4.HeaderText = "SupName";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 125;
-            // 
-            // ProdName
-            // 
-            this.ProdName.HeaderText = "ProdName";
-            this.ProdName.MinimumWidth = 6;
-            this.ProdName.Name = "ProdName";
-            this.ProdName.Width = 125;
             // 
             // frmProductManager
             // 

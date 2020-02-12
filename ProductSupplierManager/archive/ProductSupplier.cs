@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductSupplierManager
+namespace ProductSupplierManager.Archive
 {
+    [Obsolete]
     class ProductSupplier
     {
         public ProductSupplier() { }

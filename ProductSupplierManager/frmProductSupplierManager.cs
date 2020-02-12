@@ -1,7 +1,10 @@
-﻿using System;
+﻿using DBConnector;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,10 +16,24 @@ namespace ProductSupplierManager
     public partial class frmProductSupplierManager : Form
     {
         List<ProductSupplier> productSuppliers;
+        Product product;
 
         public frmProductSupplierManager()
         {
             InitializeComponent();
+
+            product = ProductDB.GetProductById(1);
+            lblProductName.Text = product.ProdName;
+
+        }
+
+        public frmProductSupplierManager(Product product)
+        {
+            InitializeComponent();
+
+            product = ProductDB.GetProduct(1);
+            this.product = product;
+            lblProductName.Text = product.ProdName;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,5 +54,7 @@ namespace ProductSupplierManager
         {
 
         }
+
+
     }
 }

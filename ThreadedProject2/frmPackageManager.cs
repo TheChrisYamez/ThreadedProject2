@@ -108,7 +108,7 @@ namespace ThreadedProject2
             PackageSelected = PackageDB.GetById(packageId);
 
             //Update non-nullable properties
-            tbxPackageId.Text = PackageSelected.PackageId.ToString();
+
             tbxPkgName.Text = PackageSelected.PkgName.ToString();
             tbxPkgPrice.Text = Decimal.Round(PackageSelected.PkgBasePrice, 2).ToString();
 

@@ -122,9 +122,9 @@ namespace MainApp
         private void UpdateSelectedButtonBackground(Control button)
         {
             this.SuspendLayout();
-            foreach (Control btn in tlpMenu.Controls)
-                if (btn is FlatButton)
-                    btn.BackColor = Color.FromArgb(36, 36, 68);
+            //foreach (Control btn in tlpMenu.Controls)
+            //    if (btn is FlatButton)
+            //        btn.BackColor = Color.FromArgb(36, 36, 68);
 
             button.BackColor = Color.FromArgb(0, 0, 10);
             this.ResumeLayout();

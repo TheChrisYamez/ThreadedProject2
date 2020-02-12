@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBConnector
+namespace ProductSupplierManager
 {
-    public static class TravelExpertsDB
+    class TravelExpertsDB
     {
         public static SqlConnection GetConnection()
         {
@@ -17,4 +17,3 @@ namespace DBConnector
         }
     }
 }
-

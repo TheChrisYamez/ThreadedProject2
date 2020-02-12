@@ -201,5 +201,10 @@ namespace MainApp
                 this.Location = newPoint;
             }
         }
+
+        private void pnlForms_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

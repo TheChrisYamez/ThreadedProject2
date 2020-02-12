@@ -33,7 +33,7 @@ namespace ProductSupplierManager
             }
         }
 
-        private void ProductSupplierDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ProductSupplierDataGrid_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }

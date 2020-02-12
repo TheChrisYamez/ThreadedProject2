@@ -35,10 +35,6 @@
             System.Windows.Forms.Label label3;
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Edit = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.prodNameComboBox = new System.Windows.Forms.ComboBox();
             this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.supplierDataGridView = new System.Windows.Forms.DataGridView();
@@ -50,6 +46,10 @@
             this.btnGoToEditSuppliersPage = new System.Windows.Forms.Button();
             this.btnAddProduct = new System.Windows.Forms.Button();
             this.btnRefreshSuppliers = new System.Windows.Forms.Button();
+            this.btnRefreshProducts = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Edit = new System.Windows.Forms.DataGridViewButtonColumn();
             prodNameLabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -116,8 +116,7 @@
             this.productDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.Edit,
-            this.Delete});
+            this.Edit});
             this.productDataGridView.DataSource = this.productBindingSource;
             this.productDataGridView.Location = new System.Drawing.Point(23, 162);
             this.productDataGridView.Name = "productDataGridView";
@@ -126,42 +125,6 @@
             this.productDataGridView.Size = new System.Drawing.Size(569, 326);
             this.productDataGridView.TabIndex = 1;
             this.productDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productDataGridView_CellContentClick_1);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ProductID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ProductID";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "ProdName";
-            this.dataGridViewTextBoxColumn2.HeaderText = "ProdName";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 125;
-            // 
-            // Edit
-            // 
-            this.Edit.HeaderText = "Edit";
-            this.Edit.MinimumWidth = 6;
-            this.Edit.Name = "Edit";
-            this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Edit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Edit.Text = "Edit";
-            this.Edit.UseColumnTextForButtonValue = true;
-            this.Edit.Width = 125;
-            // 
-            // Delete
-            // 
-            this.Delete.HeaderText = "Delete";
-            this.Delete.MinimumWidth = 6;
-            this.Delete.Name = "Delete";
-            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Delete.Width = 125;
             // 
             // prodNameComboBox
             // 
@@ -257,11 +220,49 @@
             this.btnRefreshSuppliers.UseVisualStyleBackColor = true;
             this.btnRefreshSuppliers.Click += new System.EventHandler(this.btnRefreshSuppliers_Click);
             // 
+            // btnRefreshProducts
+            // 
+            this.btnRefreshProducts.Location = new System.Drawing.Point(23, 495);
+            this.btnRefreshProducts.Name = "btnRefreshProducts";
+            this.btnRefreshProducts.Size = new System.Drawing.Size(99, 44);
+            this.btnRefreshProducts.TabIndex = 11;
+            this.btnRefreshProducts.Text = "Refresh Products";
+            this.btnRefreshProducts.UseVisualStyleBackColor = true;
+            this.btnRefreshProducts.Click += new System.EventHandler(this.btnRefreshProducts_Click);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ProductID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "ProductID";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "ProdName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "ProdName";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 125;
+            // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "Edit";
+            this.Edit.MinimumWidth = 6;
+            this.Edit.Name = "Edit";
+            this.Edit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Edit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Edit.Text = "Edit";
+            this.Edit.UseColumnTextForButtonValue = true;
+            this.Edit.Width = 125;
+            // 
             // frmProductManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1312, 571);
+            this.Controls.Add(this.btnRefreshProducts);
             this.Controls.Add(this.btnRefreshSuppliers);
             this.Controls.Add(this.btnAddProduct);
             this.Controls.Add(label3);
@@ -300,12 +301,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProdName;
         private System.Windows.Forms.Button btnGoToEditSuppliersPage;
+        private System.Windows.Forms.Button btnAddProduct;
+        private System.Windows.Forms.Button btnRefreshSuppliers;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewButtonColumn Edit;
-        private System.Windows.Forms.DataGridViewButtonColumn Delete;
-        private System.Windows.Forms.Button btnAddProduct;
-        private System.Windows.Forms.Button btnRefreshSuppliers;
+        private System.Windows.Forms.Button btnRefreshProducts;
     }
 }
 

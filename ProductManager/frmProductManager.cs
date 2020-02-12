@@ -135,5 +135,25 @@ namespace ProductManager
             frmAdd f3 = new frmAdd();
             f3.ShowDialog(); // Shows add form
         }
+
+        private void btnRefreshProducts_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //supplier = SupplierDB.GetSupplier((int)prodNameComboBox.SelectedValue);
+                //suppliers = SupplierDB.GetAllSuppliers();
+                products = ProductDB.GetAllProducts();
+                //supplierDataGridView.DataSource = suppliers;
+                //supplierDataGridView.DataSource = supplier;
+                productDataGridView.DataSource = products; // bind the grid view to the products list
+                prodNameComboBox.DataSource = products;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while loading Products data: " + ex.Message,
+                    ex.GetType().ToString());
+            }
+        }
     }
 }

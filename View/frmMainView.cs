@@ -89,29 +89,6 @@ namespace MainApp
             form.FormBorderStyle = FormBorderStyle.None;
         }
 
-        private void tableLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            IsMouseDown = true;
-            yOffset = (this.Location.Y - Cursor.Position.Y);
-            xOffset = (this.Location.X - Cursor.Position.X);
-
-        }
-
-        private void tableLayoutPanel1_MouseUp(object sender, MouseEventArgs e)
-        {
-            IsMouseDown = false;
-        }
-
-        private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (IsMouseDown)
-            {
-                var x = xOffset + Cursor.Position.X;
-                var y = yOffset + Cursor.Position.Y;
-                Point newPoint = new Point(x, y);
-                this.Location = newPoint;
-            }
-        }
 
         private void btnPackages_Click(object sender, EventArgs e)
         {
@@ -200,5 +177,29 @@ namespace MainApp
             RestoreApplicationWindow();
         }
 
+
+        private void tlpTitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = true;
+            yOffset = (this.Location.Y - Cursor.Position.Y);
+            xOffset = (this.Location.X - Cursor.Position.X);
+
+        }
+
+        private void tlpTitleBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = false;
+        }
+
+        private void tlpTitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (IsMouseDown)
+            {
+                var x = xOffset + Cursor.Position.X;
+                var y = yOffset + Cursor.Position.Y;
+                Point newPoint = new Point(x, y);
+                this.Location = newPoint;
+            }
+        }
     }
 }

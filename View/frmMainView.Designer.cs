@@ -33,7 +33,7 @@
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.pnlForms = new System.Windows.Forms.Panel();
             this.tlpMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpTitleBar = new System.Windows.Forms.TableLayoutPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.btnSuppliers = new MainApp.FlatButton();
             this.btnProducts = new MainApp.FlatButton();
@@ -42,7 +42,7 @@
             this.btnClose = new MainApp.FlatButton();
             this.tlpMain.SuspendLayout();
             this.tlpMenu.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tlpTitleBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -52,7 +52,7 @@
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpMain.Controls.Add(this.pnlForms, 0, 2);
             this.tlpMain.Controls.Add(this.tlpMenu, 0, 1);
-            this.tlpMain.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tlpMain.Controls.Add(this.tlpTitleBar, 0, 0);
             this.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpMain.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tlpMain.Location = new System.Drawing.Point(0, 0);
@@ -64,9 +64,6 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.59794F));
             this.tlpMain.Size = new System.Drawing.Size(1024, 768);
             this.tlpMain.TabIndex = 0;
-            this.tlpMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseDown);
-            this.tlpMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseMove);
-            this.tlpMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseUp);
             // 
             // pnlForms
             // 
@@ -99,22 +96,25 @@
             this.tlpMenu.Size = new System.Drawing.Size(1010, 41);
             this.tlpMenu.TabIndex = 1;
             // 
-            // tableLayoutPanel1
+            // tlpTitleBar
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.btnMinimize, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnClose, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1018, 41);
-            this.tableLayoutPanel1.TabIndex = 2;
+            this.tlpTitleBar.ColumnCount = 3;
+            this.tlpTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpTitleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpTitleBar.Controls.Add(this.btnMinimize, 0, 0);
+            this.tlpTitleBar.Controls.Add(this.btnClose, 0, 0);
+            this.tlpTitleBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpTitleBar.Location = new System.Drawing.Point(3, 3);
+            this.tlpTitleBar.Name = "tlpTitleBar";
+            this.tlpTitleBar.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tlpTitleBar.RowCount = 1;
+            this.tlpTitleBar.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpTitleBar.Size = new System.Drawing.Size(1018, 41);
+            this.tlpTitleBar.TabIndex = 2;
+            this.tlpTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tlpTitleBar_MouseDown);
+            this.tlpTitleBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tlpTitleBar_MouseMove);
+            this.tlpTitleBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tlpTitleBar_MouseUp);
             // 
             // notifyIcon1
             // 
@@ -124,7 +124,6 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Package Management System";
             this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // btnSuppliers
@@ -237,10 +236,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Travel Package System";
             this.Load += new System.EventHandler(this.frmMainView_Load);
-            this.Resize += new System.EventHandler(this.frmMainView_Resize);
             this.tlpMain.ResumeLayout(false);
             this.tlpMenu.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tlpTitleBar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -253,7 +251,7 @@
         private FlatButton btnSuppliers;
         private FlatButton btnProducts;
         private FlatButton btnPackages;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tlpTitleBar;
         private FlatButton btnMinimize;
         private FlatButton btnClose;
         private System.Windows.Forms.NotifyIcon notifyIcon1;

@@ -725,8 +725,6 @@
         private System.Windows.Forms.TextBox tbxPkgCommission;
         private System.Windows.Forms.Button btnClearEndDate;
         private System.Windows.Forms.Button btnClearStartDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.TextBox tbxPackageId;
         private System.Windows.Forms.ComboBox cmbProductList;
         private System.Windows.Forms.Button btnRemoveProduct;

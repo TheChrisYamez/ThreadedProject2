@@ -591,5 +591,10 @@ namespace ThreadedProject2
         {
 
         }
+
+        private void pnlEntireForm_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

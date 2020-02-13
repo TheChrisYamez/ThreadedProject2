@@ -66,6 +66,17 @@ namespace MainApp
             PackageManager = new frmPackageManager();
             ProductManager = new frmProductManager();
             SupplierManager = new frmSupplierManager();
+        }
+
+        ///resolves issues with double buffering
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParams = base.CreateParams;
+                handleParams.ExStyle |= 0x02000000;
+                return handleParams;
+            }
 
         }
 
@@ -78,52 +89,50 @@ namespace MainApp
             form.FormBorderStyle = FormBorderStyle.None;
         }
 
-        private void tableLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            IsMouseDown = true;
-            yOffset = (this.Location.Y - Cursor.Position.Y);
-            xOffset = (this.Location.X - Cursor.Position.X);
-
-        }
-
-        private void tableLayoutPanel1_MouseUp(object sender, MouseEventArgs e)
-        {
-            IsMouseDown = false;
-        }
-
-        private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (IsMouseDown)
-            {
-                var x = xOffset + Cursor.Position.X;
-                var y = yOffset + Cursor.Position.Y;
-                Point newPoint = new Point(x, y);
-                this.Location = newPoint;
-            }
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            PackageManager.Dispose();
-            SupplierManager.Dispose();
-            ProductManager.Dispose();
-            Application.Exit();
-
-        }
 
         private void btnPackages_Click(object sender, EventArgs e)
         {
+            UpdateSelectedButtonBackground((Control)sender);
             OpenForm(PackageManager);
         }
 
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
+            UpdateSelectedButtonBackground((Control)sender);
             OpenForm(ProductManager);
+        }
+
+
+        private void MinimizeApplicationWindow()
+        {
+            this.Visible = false;
+            notifyIcon1.Visible = true;
+            notifyIcon1.ShowBalloonTip(1000);
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void RestoreApplicationWindow()
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.Visible = true;
+            notifyIcon1.Visible = false;
+            this.Show();
+        }
+        private void UpdateSelectedButtonBackground(Control button)
+        {
+            this.SuspendLayout();
+            //foreach (Control btn in tlpMenu.Controls)
+            //    if (btn is FlatButton)
+            //        btn.BackColor = Color.FromArgb(36, 36, 68);
+
+            button.BackColor = Color.FromArgb(0, 0, 10);
+            this.ResumeLayout();
         }
 
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
+            UpdateSelectedButtonBackground((Control)sender);
             OpenForm(SupplierManager);
         }
 
@@ -132,11 +141,10 @@ namespace MainApp
             foreach (Form activeForm in pnlForms.Controls)
             {
                 activeForm.Hide();
-                activeForm.SuspendLayout();
             }
 
-            form.ResumeLayout();
             form.Show();
+
         }
 
         private void frmMainView_Load(object sender, EventArgs e)
@@ -147,6 +155,55 @@ namespace MainApp
             InitializeMenuForms(SupplierManager);
 
             OpenForm(PackageManager);
+            UpdateSelectedButtonBackground(btnPackages);
+        }
+
+        private void btnClose_Click_1(object sender, EventArgs e)
+        {
+            PackageManager.Dispose();
+            SupplierManager.Dispose();
+            ProductManager.Dispose();
+            Application.Exit();
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            MinimizeApplicationWindow();
+
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            RestoreApplicationWindow();
+        }
+
+
+        private void tlpTitleBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = true;
+            yOffset = (this.Location.Y - Cursor.Position.Y);
+            xOffset = (this.Location.X - Cursor.Position.X);
+
+        }
+
+        private void tlpTitleBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = false;
+        }
+
+        private void tlpTitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (IsMouseDown)
+            {
+                var x = xOffset + Cursor.Position.X;
+                var y = yOffset + Cursor.Position.Y;
+                Point newPoint = new Point(x, y);
+                this.Location = newPoint;
+            }
+        }
+
+        private void pnlForms_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

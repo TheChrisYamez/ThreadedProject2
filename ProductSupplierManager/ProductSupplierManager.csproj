@@ -85,7 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DBConnector\DBConnector.csproj">
+
       <Project>{14EB42E7-B9D9-4D88-AE35-A494C4C17842}</Project>
+
+      <Project>{14eb42e7-b9d9-4d88-ae35-a494c4c17842}</Project>
       <Name>DBConnector</Name>
     </ProjectReference>
   </ItemGroup>

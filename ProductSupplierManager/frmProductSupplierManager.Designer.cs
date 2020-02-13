@@ -113,10 +113,14 @@
             this.MinimumSize = new System.Drawing.Size(925, 643);
             this.Name = "frmProductSupplierManager";
             this.Text = "Form1";
+
             ((System.ComponentModel.ISupportInitialize)(this.ProductSupplierDataGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productSupplierBindingSource)).EndInit();
+
+            this.Load += new System.EventHandler(this.frmProductSupplierManager_Load);
+
             this.ResumeLayout(false);
 
         }

@@ -9,9 +9,11 @@ namespace DBConnector
    public class Supplier
     {
         
-            public int SupplierID { get; set; }
+            public int ProductID { get; set; }
+        public int SupplierID { get; set; }
 
-            public string SupName { get; set; }
+
+        public string SupName { get; set; }
 
             public string ProdName { get; set; }
 

@@ -113,10 +113,9 @@ namespace DBConnector
         public static int AddProduct(Product prod)
         {
             SqlConnection con = TravelExpertsConnection.GetConnection();
-            string insertStatement = "INSERT INTO Products (ProductID, ProdName) " +
-                                     "VALUES(@ProductID, @ProdName)";
+            string insertStatement = "INSERT INTO Products (ProdName) " +
+                                     "VALUES(@ProdName)";
             SqlCommand cmd = new SqlCommand(insertStatement, con);
-            cmd.Parameters.AddWithValue("@ProductID", prod.ProductID);
             cmd.Parameters.AddWithValue("@ProdName", prod.ProdName);
             
             try
@@ -178,10 +177,9 @@ namespace DBConnector
         {
             SqlConnection con = TravelExpertsConnection.GetConnection();
             string updateStatement = "UPDATE Products " +
-                                     "SET ProductID = @NewProductID, " +
-                                     "    ProdName = @NewProdName, " +
-                                     "WHERE ProductID = @OldProductID " +
-                                     "AND ProdName = @OldProdName ";
+                                     "SET ProdName = @NewProdName " +
+                                     "WHERE ProductID = @OldProductID ";
+                                     
             SqlCommand cmd = new SqlCommand(updateStatement, con);
             cmd.Parameters.AddWithValue("@NewProductID", newProd.ProductID);
             cmd.Parameters.AddWithValue("@NewProdName", newProd.ProdName);
@@ -203,5 +201,6 @@ namespace DBConnector
                 con.Close();
             }
         }
+
     }
 }

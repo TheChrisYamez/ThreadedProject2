@@ -10,13 +10,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace ProductSupplierManager
 {
     public partial class frmProductSupplierManager : Form
     {
+
         List<ProductSupplier> productSuppliers;
         Product product;
+
+        public Supplier supplier;
+
 
         public frmProductSupplierManager()
         {
@@ -26,6 +29,7 @@ namespace ProductSupplierManager
             lblProductName.Text = product.ProdName;
 
         }
+
 
         public frmProductSupplierManager(Product product)
         {
@@ -56,5 +60,35 @@ namespace ProductSupplierManager
         }
 
 
+
+        private void frmProductSupplierManager_Load(object sender, EventArgs e)
+        {
+
+            //    this.Text = "Modify Customer";
+            //    this.DisplayCustomer();
+            //}
+            //}
+            //private void DisplayCustomer()
+            //{
+            //    txtName.Text = customer.Name;
+            //    txtAddress.Text = customer.Address;
+            //    txtCity.Text = customer.City;
+            //    cboStates.SelectedValue = customer.State;
+            //    txtZipCode.Text = customer.ZipCode;
+            //}
+
+            //private void PutCustomerData(Customer customer)
+            //{
+            //    customer.Name = txtName.Text;
+            //    customer.Address = txtAddress.Text;
+            //    customer.City = txtCity.Text;
+            //    customer.State = cboStates.SelectedValue.ToString();
+            //    customer.ZipCode = txtZipCode.Text;
+            //}
+
+
+        }
+
     }
 }
+

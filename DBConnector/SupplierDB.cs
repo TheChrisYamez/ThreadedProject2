@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,21 +17,27 @@ namespace DBConnector
                 List<Supplier> suppliers = new List<Supplier>();
                 Supplier sup = null;
                 SqlConnection con = TravelExpertsDB.GetConnection();
-                string selectStatement = "SELECT SupplierID, SupName " +
-                                         "FROM Suppliers " +
-                                         "ORDER BY SupplierID";
-                SqlCommand cmd = new SqlCommand(selectStatement, con);
+            string selectStatement = "SELECT s.SupplierID, s.SupName, p.ProdName, p.ProductID  " +
+                                         "FROM Suppliers s " +
+                                         "INNER JOIN Products_Suppliers ps " +
+                                         "on s.SupplierID = ps.SupplierID " +
+                                         "INNER JOIN Products p " +
+                                         "on ps.ProductID = p.ProductID ";
+                                         
+            SqlCommand cmd = new SqlCommand(selectStatement, con);
 
                 try
                 {
                     con.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read()) // while there are customers
+                    while (reader.Read()) // while there are suppliers
                     {
                         sup = new Supplier();
-                        sup.SupplierID = (int)reader["SupplierID"];
-                        sup.SupName = reader["SupName"].ToString();
-                        suppliers.Add(sup);
+                    sup.ProductID = (int)reader["ProductID"];
+                    sup.SupplierID = (int)reader["SupplierID"];
+                    sup.SupName = reader["SupName"].ToString();
+                    sup.ProdName = reader["ProdName"].ToString();
+                    suppliers.Add(sup);
                     }
                 }
                 catch (SqlException ex)
@@ -43,30 +50,36 @@ namespace DBConnector
                 }
                 return suppliers;
             }
-            public static Supplier GetSupplier(int supplierID)
+            public static List<Supplier> GetSupplier(int productID)
             {
-                Supplier sup = null;
+            List<Supplier> suppliers = new List<Supplier>();
+
+            Supplier sup = null;
                 SqlConnection con = TravelExpertsDB.GetConnection();
-                string selectStatement = "SELECT s.SupName, p.ProdName,  " +
+                string selectStatement = "SELECT s.SupplierID, s.SupName, p.ProdName, p.ProductID  " +
                                          "FROM Suppliers s " +
                                          "INNER JOIN Products_Suppliers ps " +
-                                         "on s.SupplierID = ps.ProductSupplierID " +
+                                         "on s.SupplierID = ps.SupplierID " +
                                          "INNER JOIN Products p " +
                                          "on ps.ProductID = p.ProductID " +
-                                         "WHERE SupplierID = @SupplierID";
+                                         "WHERE p.ProductID = @ProductID";
                 SqlCommand cmd = new SqlCommand(selectStatement, con);
-                cmd.Parameters.AddWithValue("@SupplierID", supplierID); // value comes from the method's argument
+                cmd.Parameters.AddWithValue("@ProductID", productID); // value comes from the method's argument
                 try
                 {
+                //add while loop in list form
                     con.Open();
-                    SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
-                    if (reader.Read()) // found a supplier
-                    {
-                        sup = new Supplier();
-                        sup.SupplierID = (int)reader["SupplierID"];
-                        sup.SupName = reader["SupName"].ToString();
+                    SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read()) // found a supplier
+                {
+                    sup = new Supplier();
+                    sup.ProductID = (int)reader["ProductID"];
+
+                    sup.SupplierID = (int)reader["SupplierID"];
+                    sup.SupName = reader["SupName"].ToString();
                     sup.ProdName = reader["ProdName"].ToString();
-                    }
+                    suppliers.Add(sup);
+                }
                 }
                 catch (SqlException ex)
                 {
@@ -76,11 +89,50 @@ namespace DBConnector
                 {
                     con.Close();
                 }
-                return sup;
+                return suppliers;
             }
+        public static Supplier GetSingleSupplier(int productID)
+        {
 
-           
-            public static int AddSupplier(Supplier sup)
+            Supplier sup = null;
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string selectStatement = "SELECT s.SupplierID, s.SupName, p.ProdName, p.ProductID  " +
+                                     "FROM Suppliers s " +
+                                     "INNER JOIN Products_Suppliers ps " +
+                                     "on s.SupplierID = ps.SupplierID " +
+                                     "INNER JOIN Products p " +
+                                     "on ps.ProductID = p.ProductID " +
+                                     "WHERE p.ProductID = @ProductID";
+            SqlCommand cmd = new SqlCommand(selectStatement, con);
+            cmd.Parameters.AddWithValue("@ProductID", productID); // value comes from the method's argument
+            try
+            {
+                //add while loop in list form
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read()) // found a supplier
+                {
+                    sup = new Supplier();
+                    sup.ProductID = (int)reader["ProductID"];
+
+                    sup.SupplierID = (int)reader["SupplierID"];
+                    sup.SupName = reader["SupName"].ToString();
+                    sup.ProdName = reader["ProdName"].ToString();
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return sup;
+        }
+
+
+        public static int AddSupplier(Supplier sup)
             {
                 SqlConnection con = TravelExpertsDB.GetConnection();
                 string insertStatement = "INSERT INTO Suppliers (SupplierID, SupName) " +
@@ -168,6 +220,50 @@ namespace DBConnector
                     con.Close();
                 }
             }
+
+        /// <summary>
+        /// <author> Brian Appleton</author>
+        /// Gets all the suppliers attached to a specific product
+        /// </summary>
+        /// <param name="productId">the product id</param>
+        /// <returns></returns>
+        public static BindingList<Supplier> GetProductSuppliers(int productId)
+        {
+            BindingList<Supplier> suppliers = new BindingList<Supplier>();
+
+            SqlConnection con = TravelExpertsDB.GetConnection();
+
+            string selectStatement = "SELECT s.SupName,s.SupplierId,pr.ProdName " +
+                                    "FROM Products_Suppliers as p " +
+                                    "JOIN Suppliers as s " +
+                                    "ON s.SupplierId = p.SupplierId " +
+                                    "JOIN Products as pr " +
+                                    "ON pr.ProductId = p.ProductId " +
+                                    "WHERE pr.ProductID = @ProductID";
+
+
+            using (SqlCommand cmd = new SqlCommand(selectStatement, con))
+            {
+                cmd.Parameters.AddWithValue("@ProductID", productId);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (reader.Read()) // found a customer
+                {
+                    Supplier supplier = new Supplier()
+                    {
+                        SupName = (string)reader[0],
+                        SupplierID = (int)reader[1],
+                        ProdName = (string)reader[2],
+                    };
+
+                    suppliers.Add(supplier);
+                }
+
+                return suppliers;
+            }
         }
+    }
     }
 

@@ -22,6 +22,9 @@ namespace ProductManager
 
         private void FrmUpdate_Load(object sender, EventArgs e)
         {
+            //Name at the top of the form when it loads
+            this.Text = "Edit Product Page";
+
             // bind the controls to the product object
             productBindingSource.Clear();
             productBindingSource.Add(product); // bind to the current product
@@ -39,6 +42,11 @@ namespace ProductManager
                 this.DialogResult = DialogResult.Retry;
             }
 
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

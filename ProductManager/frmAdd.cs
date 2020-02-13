@@ -32,17 +32,36 @@ namespace ProductManager
                     try
                     {
                         product.ProdName = ProductDB.AddProduct(product).ToString();
-                        this.DialogResult = DialogResult.OK;
+                //this.DialogResult = DialogResult.OK;
+                this.ClearControls();
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, ex.GetType().ToString());
                     }
                 }
+
+        private void ClearControls()
+        {
+            txtAdd.Text = "";
+            txtAdd.Focus();
+        }
+
         private void PutProductData(Product product)
         {
-            product.ProdName = txtName.Text;
+            product.ProdName = txtAdd.Text;
             
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmAdd_Load(object sender, EventArgs e)
+        {
+            this.Text = "Add Product";
+
         }
     }
     }

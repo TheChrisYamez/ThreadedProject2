@@ -91,9 +91,48 @@ namespace DBConnector
                 }
                 return suppliers;
             }
+        public static Supplier GetSingleSupplier(int productID)
+        {
 
-           
-            public static int AddSupplier(Supplier sup)
+            Supplier sup = null;
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string selectStatement = "SELECT s.SupplierID, s.SupName, p.ProdName, p.ProductID  " +
+                                     "FROM Suppliers s " +
+                                     "INNER JOIN Products_Suppliers ps " +
+                                     "on s.SupplierID = ps.SupplierID " +
+                                     "INNER JOIN Products p " +
+                                     "on ps.ProductID = p.ProductID " +
+                                     "WHERE p.ProductID = @ProductID";
+            SqlCommand cmd = new SqlCommand(selectStatement, con);
+            cmd.Parameters.AddWithValue("@ProductID", productID); // value comes from the method's argument
+            try
+            {
+                //add while loop in list form
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (reader.Read()) // found a supplier
+                {
+                    sup = new Supplier();
+                    sup.ProductID = (int)reader["ProductID"];
+
+                    sup.SupplierID = (int)reader["SupplierID"];
+                    sup.SupName = reader["SupName"].ToString();
+                    sup.ProdName = reader["ProdName"].ToString();
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return sup;
+        }
+
+
+        public static int AddSupplier(Supplier sup)
             {
                 SqlConnection con = TravelExpertsDB.GetConnection();
                 string insertStatement = "INSERT INTO Suppliers (SupplierID, SupName) " +

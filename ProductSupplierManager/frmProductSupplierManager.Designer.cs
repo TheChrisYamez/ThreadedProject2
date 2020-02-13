@@ -48,6 +48,7 @@
             this.Controls.Add(this.button1);
             this.Name = "frmProductSupplierManager";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.frmProductSupplierManager_Load);
             this.ResumeLayout(false);
 
         }

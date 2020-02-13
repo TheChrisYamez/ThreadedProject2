@@ -17,6 +17,8 @@ namespace ProductManager
 {
     public partial class frmProductManager : Form
     {
+        private Supplier supplier; // current customer or null in none selected
+
         public frmProductManager()
         {
             InitializeComponent();
@@ -36,8 +38,10 @@ namespace ProductManager
        
         private void frmProductManager_Load(object sender, EventArgs e)
         {
+            this.Text = "Product Information Page";
 
-           
+
+
             try
             {
                 //supplier = SupplierDB.GetSupplier((int)prodNameComboBox.SelectedValue);
@@ -89,6 +93,22 @@ namespace ProductManager
         {
             frmProductSupplierManager f2 = new frmProductSupplierManager();
             f2.ShowDialog(); // Shows Form2
+
+            //f2.supplier = supplier;
+            //DialogResult result = f2.ShowDialog();
+            //if (result == DialogResult.OK)
+            //{
+            //    supplier = f2.supplier;
+            //    this.DisplaySupplier();
+            //}
+            //else if (result == DialogResult.Retry)
+            //{
+            //    SupplierDB.GetSingleSupplier(supplier.SupplierID);
+            //    if (supplier != null)
+            //        this.DisplaySupplier();
+            //    else
+            //        this.ClearControls();
+            //}
         }
 
         private void productDataGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -155,5 +175,24 @@ namespace ProductManager
                     ex.GetType().ToString());
             }
         }
+
+        private void productBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //private void DisplaySupplier()
+        //{
+        //    txtName.Text = customer.Name;
+        //    txtAddress.Text = customer.Address;
+        //    txtCity.Text = customer.City;
+        //    txtState.Text = customer.State;
+        //    txtZipCode.Text = customer.ZipCode;
+        //    btnModify.Enabled = true;
+        //    btnDelete.Enabled = true;
+        //}
+
+
     }
+
 }

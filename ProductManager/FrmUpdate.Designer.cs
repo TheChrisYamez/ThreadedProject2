@@ -44,45 +44,49 @@
             // productIDLabel
             // 
             productIDLabel.AutoSize = true;
-            productIDLabel.Location = new System.Drawing.Point(70, 82);
+            productIDLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            productIDLabel.Location = new System.Drawing.Point(126, 181);
             productIDLabel.Name = "productIDLabel";
-            productIDLabel.Size = new System.Drawing.Size(78, 17);
+            productIDLabel.Size = new System.Drawing.Size(155, 32);
             productIDLabel.TabIndex = 3;
             productIDLabel.Text = "Product ID:";
+            // 
+            // prodNameLabel1
+            // 
+            prodNameLabel1.AutoSize = true;
+            prodNameLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            prodNameLabel1.Location = new System.Drawing.Point(78, 128);
+            prodNameLabel1.Name = "prodNameLabel1";
+            prodNameLabel1.Size = new System.Drawing.Size(203, 32);
+            prodNameLabel1.TabIndex = 5;
+            prodNameLabel1.Text = "Product Name:";
             // 
             // productIDTextBox
             // 
             this.productIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProductID", true));
-            this.productIDTextBox.Location = new System.Drawing.Point(159, 79);
+            this.productIDTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productIDTextBox.Location = new System.Drawing.Point(322, 175);
             this.productIDTextBox.Name = "productIDTextBox";
             this.productIDTextBox.ReadOnly = true;
-            this.productIDTextBox.Size = new System.Drawing.Size(121, 22);
+            this.productIDTextBox.Size = new System.Drawing.Size(328, 38);
             this.productIDTextBox.TabIndex = 4;
             // 
             // productBindingSource
             // 
             this.productBindingSource.DataSource = typeof(DBConnector.Product);
             // 
-            // prodNameLabel1
-            // 
-            prodNameLabel1.AutoSize = true;
-            prodNameLabel1.Location = new System.Drawing.Point(70, 54);
-            prodNameLabel1.Name = "prodNameLabel1";
-            prodNameLabel1.Size = new System.Drawing.Size(83, 17);
-            prodNameLabel1.TabIndex = 5;
-            prodNameLabel1.Text = "Prod Name:";
-            // 
             // prodNameTextBox
             // 
             this.prodNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productBindingSource, "ProdName", true));
-            this.prodNameTextBox.Location = new System.Drawing.Point(159, 49);
+            this.prodNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prodNameTextBox.Location = new System.Drawing.Point(322, 122);
             this.prodNameTextBox.Name = "prodNameTextBox";
-            this.prodNameTextBox.Size = new System.Drawing.Size(121, 22);
+            this.prodNameTextBox.Size = new System.Drawing.Size(328, 38);
             this.prodNameTextBox.TabIndex = 6;
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(73, 121);
+            this.btnAccept.Location = new System.Drawing.Point(322, 241);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(113, 41);
             this.btnAccept.TabIndex = 7;
@@ -92,12 +96,13 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(206, 121);
+            this.btnClose.Location = new System.Drawing.Point(537, 241);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(113, 41);
             this.btnClose.TabIndex = 8;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // FrmUpdate
             // 

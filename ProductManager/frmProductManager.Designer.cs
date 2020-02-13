@@ -206,7 +206,7 @@
             // btnRefreshSuppliers
             // 
             this.btnRefreshSuppliers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshSuppliers.Location = new System.Drawing.Point(1041, 490);
+            this.btnRefreshSuppliers.Location = new System.Drawing.Point(1041, 500);
             this.btnRefreshSuppliers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefreshSuppliers.Name = "btnRefreshSuppliers";
             this.btnRefreshSuppliers.Size = new System.Drawing.Size(207, 46);
@@ -218,7 +218,7 @@
             // btnRefreshProducts
             // 
             this.btnRefreshProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshProducts.Location = new System.Drawing.Point(79, 490);
+            this.btnRefreshProducts.Location = new System.Drawing.Point(80, 500);
             this.btnRefreshProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefreshProducts.Name = "btnRefreshProducts";
             this.btnRefreshProducts.Size = new System.Drawing.Size(201, 44);

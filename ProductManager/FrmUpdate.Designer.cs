@@ -86,9 +86,10 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(322, 241);
+            this.btnAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAccept.Location = new System.Drawing.Point(322, 235);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(113, 41);
+            this.btnAccept.Size = new System.Drawing.Size(125, 47);
             this.btnAccept.TabIndex = 7;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
@@ -96,9 +97,10 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(537, 241);
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(525, 235);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(113, 41);
+            this.btnClose.Size = new System.Drawing.Size(125, 47);
             this.btnClose.TabIndex = 8;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
